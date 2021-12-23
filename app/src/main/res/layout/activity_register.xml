@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter the credentials"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:id="@+id/textCredentials"/>
+
+    <LinearLayout
+        android:id="@+id/linearLay_credentials"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textCredentials"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <EditText
+            android:id="@+id/txtFirstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:hint="First Name"
+            android:textColorHint="@color/grey"
+            android:textSize="14sp"
+            android:background="@android:color/transparent"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="3dp"
+            android:background="@color/yellow" />
+
+        <EditText
+            android:id="@+id/txtLastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:hint="Last Name"
+            android:textColorHint="@color/grey"
+            android:textSize="14sp"
+            android:background="@android:color/transparent"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="3dp"
+            android:background="@color/yellow" />
+
+        <EditText
+            android:id="@+id/txtPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:hint="Phone"
+            android:textColorHint="@color/grey"
+            android:textSize="14sp"
+            android:background="@android:color/transparent"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="3dp"
+            android:background="@color/yellow" />
+
+        <EditText
+            android:id="@+id/txtEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:hint="Email"
+            android:textColorHint="@color/grey"
+            android:textSize="14sp"
+            android:background="@android:color/transparent"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="3dp"
+            android:background="@color/yellow" />
+
+        <EditText
+            android:id="@+id/txtPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dp"
+            android:hint="Password"
+            android:textColorHint="@color/grey"
+            android:textSize="14sp"
+            android:background="@android:color/transparent"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="3dp"
+            android:background="@color/yellow" />
+
+        <EditText
+            android:id="@+id/txtRePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:hint="Re-enter password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/grey"
+            android:textSize="14sp"
+            android:background="@android:color/transparent"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="3dp"
+            android:background="@color/yellow" />
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearLay_credentials"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/white"
+        android:text="Register"
+        android:textColor="@color/textColor"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:strokeColor="@color/yellow"
+        app:strokeWidth="3dp" />
+
+    <ImageView
+        android:layout_width="270dp"
+        android:layout_height="240dp"
+        android:layout_below="@+id/btnRegister"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_register" />
+
+
+
+
+</RelativeLayout>

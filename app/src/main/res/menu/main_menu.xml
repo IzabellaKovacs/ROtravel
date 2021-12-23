@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/nav_home"
+            android:title="Home"
+            android:icon="@drawable/ic_home_icon"
+            android:onClick="ClickHome" />
+        <item
+            android:id="@+id/nav_follow"
+            android:title="Follow"
+            android:icon="@drawable/ic_people_icon"/>
+        <item
+            android:id="@+id/nav_add_property"
+            android:title="Add a property"
+            android:icon="@drawable/ic_place_icon"
+            android:onClick="ClickAddProperty"/>
+
+
+    <item android:title="Profile">
+        <menu>
+                <item
+                    android:id="@+id/nav_profile"
+                    android:title="Your profile"
+                    android:icon="@drawable/ic_person_icon"/>
+                <item
+                    android:id="@+id/nav_logout"
+                    android:title="Log out"
+                    android:icon="@drawable/ic_logout_icon"/>
+        </menu>
+    </item>
+</menu>
