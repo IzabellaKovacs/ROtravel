@@ -1,26 +1,39 @@
 package com.example.rotravel;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.rotravel.HelperClasses.AllCitiesRecViewAdapter;
 import com.example.rotravel.HelperClasses.BaseMenuActivity;
 import com.example.rotravel.Model.Place;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class TripPlanActivity extends BaseMenuActivity {
 
-    RecyclerView allPlaces;
-    AllCitiesRecViewAdapter adapter;
+    private static final Object TAG = "mergi" ;
+    private RecyclerView allPlaces;
+    private AllCitiesRecViewAdapter adapter;
+    private DatabaseReference mDatabse;
+    ArrayList<Place> places = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         allPlaces = findViewById(R.id.allPlaces);
+
+        mDatabse = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Places");
 
         showAllPlaces();
     }
@@ -31,29 +44,28 @@ public class TripPlanActivity extends BaseMenuActivity {
     }
 
     private void showAllPlaces(){
+        ValueEventListener postListener = new ValueEventListener(){
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Place place = dataSnapshot.getValue(Place.class);
+                    places.add(place);
+
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w((String) TAG, "loadPost:onCancelled", error.toException());
+            }
+        };
+
+        mDatabse.addValueEventListener(postListener);
+
         allPlaces.setHasFixedSize(true);
         allPlaces.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-        ArrayList<Place> places = new ArrayList<>();
-        places.add(new Place(R.drawable.tm, "Timisoara"));
-        places.add(new Place(R.drawable.carpati, "Muntii Carpati"));
-        places.add(new Place(R.drawable.oradea, "Oradea"));
-        places.add(new Place(R.drawable.orsova, "Orsova"));
-        places.add(new Place(R.drawable.b, "Bucuresti"));
-        places.add(new Place(R.drawable.belis, "Belis"));
-        places.add(new Place(R.drawable.iasi, "Iasi"));
-        places.add(new Place(R.drawable.poiana, "Poiana Marului"));
-        places.add(new Place(R.drawable.remetea, "Remetea Bihor"));
-        places.add(new Place(R.drawable.retezat, "Muntii Retezat"));
-        places.add(new Place(R.drawable.alba, "Alba Iulia"));
-        places.add(new Place(R.drawable.cj, "Cluj-Napoca"));
-        places.add(new Place(R.drawable.con, "Constanta"));
-        places.add(new Place(R.drawable.vfmoldoveanu, "Varful Moldoveanu"));
-        places.add(new Place(R.drawable.craiova, "Craiova"));
-        places.add(new Place(R.drawable.vfomu, "Varful Omu"));
-        places.add(new Place(R.drawable.fagaras, "Muntii Fagaras"));
-        places.add(new Place(R.drawable.sb, "Sibiu"));
-
 
         adapter = new AllCitiesRecViewAdapter(this, places);
         allPlaces.setAdapter(adapter);

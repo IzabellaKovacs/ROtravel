@@ -37,7 +37,6 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(view -> {
             createUser();
         });
-
     }
 
     private void createUser(){
@@ -64,7 +63,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
 }

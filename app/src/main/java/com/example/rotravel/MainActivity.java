@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(MainActivity.this, "User Created", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
                     } else {
                         Toast.makeText(MainActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

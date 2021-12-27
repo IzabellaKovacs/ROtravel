@@ -1,19 +1,16 @@
 package com.example.rotravel.Model;
 
 public class Place {
-    int image;
+    String image;
     String name;
 
-    public Place(int image, String name) {
-        this.image = image;
-        this.name = name;
-    }
+    public Place() {}
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

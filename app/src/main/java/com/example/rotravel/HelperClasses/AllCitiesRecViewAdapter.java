@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rotravel.Model.Place;
 import com.example.rotravel.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class AllCitiesRecViewAdapter extends RecyclerView.Adapter<AllCitiesRecViewAdapter.ViewHolder>{
 
     Context context;
-    ArrayList<Place> places = new ArrayList<>();
+    ArrayList<Place> places;
 
     public AllCitiesRecViewAdapter(Context context, ArrayList<Place> places) {
         this.context = context;
@@ -36,8 +37,8 @@ public class AllCitiesRecViewAdapter extends RecyclerView.Adapter<AllCitiesRecVi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Place place = places.get(position);
-        holder.imgPlace.setImageResource(place.getImage());
         holder.txtPlaceName.setText(place.getName());
+        Picasso.get().load(place.getImage()).into(holder.imgPlace);
     }
 
     @Override
