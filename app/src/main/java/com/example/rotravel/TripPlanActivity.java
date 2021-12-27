@@ -1,28 +1,87 @@
 package com.example.rotravel;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.widget.ListView;
 
 import com.example.rotravel.HelperClasses.AllCitiesRecViewAdapter;
+import com.example.rotravel.HelperClasses.AllPlacesAdapter;
 import com.example.rotravel.HelperClasses.BaseMenuActivity;
-import com.example.rotravel.Model.Place;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
+import java.util.List;
+
+import com.example.rotravel.Model.Place;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class TripPlanActivity extends BaseMenuActivity {
 
-    RecyclerView allPlaces;
-    AllCitiesRecViewAdapter adapter;
+    List<Place> places = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        allPlaces = findViewById(R.id.allPlaces);
+        ListView allPlacesList = findViewById(R.id.allPlacesList);
 
-        showAllPlaces();
+        final AllPlacesAdapter adapter = new AllPlacesAdapter(this, R.layout.list_item_city, places);
+        allPlacesList.setAdapter(adapter);
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
+
+        databaseReference.child("Places").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//                try{
+//                    Place place = snapshot.getValue(Place.class);
+//
+//                    if(place.getImage() != null && place.getName() != null){
+//                        places.add(place);
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                }catch (Exception e){
+//
+//                }
+                places.add(snapshot.getValue(Place.class));
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
@@ -30,32 +89,4 @@ public class TripPlanActivity extends BaseMenuActivity {
         return R.layout.activity_trip_plan;
     }
 
-    private void showAllPlaces(){
-        allPlaces.setHasFixedSize(true);
-        allPlaces.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-        ArrayList<Place> places = new ArrayList<>();
-        places.add(new Place(R.drawable.tm, "Timisoara"));
-        places.add(new Place(R.drawable.carpati, "Muntii Carpati"));
-        places.add(new Place(R.drawable.oradea, "Oradea"));
-        places.add(new Place(R.drawable.orsova, "Orsova"));
-        places.add(new Place(R.drawable.b, "Bucuresti"));
-        places.add(new Place(R.drawable.belis, "Belis"));
-        places.add(new Place(R.drawable.iasi, "Iasi"));
-        places.add(new Place(R.drawable.poiana, "Poiana Marului"));
-        places.add(new Place(R.drawable.remetea, "Remetea Bihor"));
-        places.add(new Place(R.drawable.retezat, "Muntii Retezat"));
-        places.add(new Place(R.drawable.alba, "Alba Iulia"));
-        places.add(new Place(R.drawable.cj, "Cluj-Napoca"));
-        places.add(new Place(R.drawable.con, "Constanta"));
-        places.add(new Place(R.drawable.vfmoldoveanu, "Varful Moldoveanu"));
-        places.add(new Place(R.drawable.craiova, "Craiova"));
-        places.add(new Place(R.drawable.vfomu, "Varful Omu"));
-        places.add(new Place(R.drawable.fagaras, "Muntii Fagaras"));
-        places.add(new Place(R.drawable.sb, "Sibiu"));
-
-
-        adapter = new AllCitiesRecViewAdapter(this, places);
-        allPlaces.setAdapter(adapter);
-    }
 }

@@ -4,26 +4,29 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.rotravel.Model.Place;
 import com.example.rotravel.R;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class AllCitiesRecViewAdapter extends RecyclerView.Adapter<AllCitiesRecViewAdapter.ViewHolder>{
+public class AllCitiesRecViewAdapter extends FirebaseRecyclerAdapter<Place, AllCitiesRecViewAdapter.ViewHolder> {
 
-    Context context;
-    ArrayList<Place> places = new ArrayList<>();
+    ArrayList<Place> places;
 
-    public AllCitiesRecViewAdapter(Context context, ArrayList<Place> places) {
-        this.context = context;
-        this.places = places;
+    public AllCitiesRecViewAdapter(FirebaseRecyclerOptions<Place> place) {
+      super(place);
     }
 
     @NonNull
@@ -34,27 +37,23 @@ public class AllCitiesRecViewAdapter extends RecyclerView.Adapter<AllCitiesRecVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Place place = places.get(position);
-        holder.imgPlace.setImageResource(place.getImage());
-        holder.txtPlaceName.setText(place.getName());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Place model) {
+        holder.txtPlaceName.setText(model.getName());
+
+        Picasso.get().load("image").into(holder.imgPlace);
     }
 
-    @Override
-    public int getItemCount() {
-        return places.size();
-    }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        CardView parent;
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgPlace;
         TextView txtPlaceName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            parent = itemView.findViewById(R.id.parent);
+
             imgPlace = itemView.findViewById(R.id.imgPlace);
             txtPlaceName = itemView.findViewById(R.id.txtPlaceName);
+
         }
     }
 }
