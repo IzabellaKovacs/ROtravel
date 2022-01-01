@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:openDrawer="start"
+    android:id="@+id/drawer_layout"
+    tools:context=".AddPropertyActivity">
+
+    <include layout="@layout/main_toolbar"/>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/navigation_view"
+        android:layout_gravity="start"
+        app:menu="@menu/main_menu"
+        android:background="@color/textColor"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"
+        app:headerLayout="@layout/menu_header" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/layoutAddProp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_place_icon"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add a property"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/red"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutProp"
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/layoutAddProp"
+                android:padding="20dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/txtPropertyName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:inputType="text"
+                    android:layout_marginTop="10dp"
+                    android:hint="Property name"
+                    android:textColorHint="@color/grey"
+                    android:textSize="14sp"
+                    android:background="@android:color/transparent"/>
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="3dp"
+                    android:background="@color/red" />
+
+                <EditText
+                    android:id="@+id/txtPricePerNight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:inputType="number"
+                    android:layout_marginTop="10dp"
+                    android:hint="Price per night"
+                    android:textColorHint="@color/grey"
+                    android:textSize="14sp"
+                    android:background="@android:color/transparent"
+                    android:autofillHints="100 lei" />
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="3dp"
+                    android:background="@color/red" />
+
+                <EditText
+                    android:id="@+id/txtDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:inputType="textMultiLine"
+                    android:layout_marginTop="10dp"
+                    android:hint="Description"
+                    android:textColorHint="@color/grey"
+                    android:textSize="14sp"
+                    android:background="@android:color/transparent"
+                    android:autofillHints="100 lei" />
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="3dp"
+                    android:background="@color/red" />
+
+                <Spinner
+                    android:id="@+id/spinnerPlaces"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add photo of the property"
+                    android:layout_marginTop="30dp"
+                    android:textColor="@color/textColor"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

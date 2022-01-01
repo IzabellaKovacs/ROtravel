@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/parent"
+    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="200dp"
+        android:id="@+id/cardView"
+        app:cardCornerRadius="10dp"
+        android:layout_height="120dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgPlaceToStay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tm"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/txtPlaceToStay"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#81E4E7ED"
+            android:text="Hotel Name"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCheckDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="35dp"
+        android:backgroundTint="@color/white"
+        android:text="Check"
+        android:textColor="@color/textColor"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:cornerRadius="7dp"
+        app:icon="@drawable/ic_hotel"
+        app:iconTint="@color/blue"
+        app:strokeColor="@color/blue"
+        app:strokeWidth="2dp" />
+
+</LinearLayout>
