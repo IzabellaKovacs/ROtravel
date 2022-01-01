@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.rotravel.AddPropertyActivity;
 import com.example.rotravel.R;
 import com.example.rotravel.TripPlanActivity;
 import com.example.rotravel.WelcomeActivity;
@@ -35,12 +36,7 @@ public abstract class BaseMenuActivity extends AppCompatActivity implements Navi
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener( this);
 
-        btnMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
+        btnMenu.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
     }
 
     public abstract int getLayoutRes();
@@ -52,7 +48,7 @@ public abstract class BaseMenuActivity extends AppCompatActivity implements Navi
     }
 
     public void ClickAddProperty(MenuItem item) {
-        redirectActivity(this, TripPlanActivity.class);
+        redirectActivity(this, AddPropertyActivity.class);
     }
 
     public void ClickHome(MenuItem item) {

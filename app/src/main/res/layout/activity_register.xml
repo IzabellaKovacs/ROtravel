@@ -134,7 +134,7 @@
         android:textColor="@color/textColor"
         android:textSize="17sp"
         android:textStyle="bold"
-        app:cornerRadius="10dp"
+        app:cornerRadius="7dp"
         app:strokeColor="@color/yellow"
         app:strokeWidth="3dp" />
 

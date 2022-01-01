@@ -6,10 +6,7 @@
             android:title="Home"
             android:icon="@drawable/ic_home_icon"
             android:onClick="ClickHome" />
-        <item
-            android:id="@+id/nav_follow"
-            android:title="Follow"
-            android:icon="@drawable/ic_people_icon"/>
+
         <item
             android:id="@+id/nav_add_property"
             android:title="Add a property"
@@ -22,6 +19,7 @@
                 <item
                     android:id="@+id/nav_profile"
                     android:title="Your profile"
+                    android:iconTint="@color/white"
                     android:icon="@drawable/ic_person_icon"/>
                 <item
                     android:id="@+id/nav_logout"

@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ROtravel">
         <activity
+            android:name=".AddPropertyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TripReserveActivity"
+            android:exported="false" />
+        <activity
             android:name=".TripPlanActivity"
             android:exported="true" />
         <activity

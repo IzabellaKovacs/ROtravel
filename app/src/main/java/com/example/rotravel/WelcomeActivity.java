@@ -25,6 +25,8 @@ public class WelcomeActivity extends BaseMenuActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     @Override
