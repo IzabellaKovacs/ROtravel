@@ -30,6 +30,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TripPlanActivity extends BaseMenuActivity {
 
@@ -37,7 +38,6 @@ public class TripPlanActivity extends BaseMenuActivity {
     ImageButton btnSearch;
     EditText txtSearch;
 
-    private static final Object TAG = "mergi" ;
     private AllCitiesRecViewAdapter adapter;
     private DatabaseReference mDatabse;
     private DataSnapshot placesDataSnapshot;
@@ -77,7 +77,6 @@ public class TripPlanActivity extends BaseMenuActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.w((String) TAG, "loadPost:onCancelled", error.toException());
             }
         };
 
@@ -102,7 +101,7 @@ public class TripPlanActivity extends BaseMenuActivity {
             if (name.isEmpty()) {
                 places.add(place);
             } else {
-                if (place.getName().startsWith(name)) {
+                if (place.getName().toLowerCase().startsWith(name.toLowerCase())) {
                     places.add(place);
                 }
             }

@@ -11,22 +11,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rotravel.Model.Hotel;
 import com.example.rotravel.Model.Place;
+import com.example.rotravel.Model.Property;
 import com.example.rotravel.R;
-import com.example.rotravel.TripReserveActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class AllPlacesToStayRecViewAdapter extends RecyclerView.Adapter<AllPlacesToStayRecViewAdapter.ViewHolder> {
+    public interface OnItemClickListener {
+        void onItemClick(Property property);
+    }
 
     Context context;
-    ArrayList<Hotel> hotels;
+    ArrayList<Property> properties;
+    OnItemClickListener listener;
 
-    public AllPlacesToStayRecViewAdapter(Context context, ArrayList<Hotel> hotels) {
+    public AllPlacesToStayRecViewAdapter(Context context, ArrayList<Property> properties, OnItemClickListener listener) {
         this.context = context;
-        this.hotels = hotels;
+        this.properties = properties;
+        this.listener = listener;
     }
 
     @NonNull
@@ -38,14 +42,17 @@ public class AllPlacesToStayRecViewAdapter extends RecyclerView.Adapter<AllPlace
 
     @Override
     public void onBindViewHolder(@NonNull AllPlacesToStayRecViewAdapter.ViewHolder holder, int position) {
-        Hotel hotel = hotels.get(position);
-        holder.txtPlaceToStay.setText(hotel.getTxtHotelName());
-        holder.imgPlaceToStay.setImageResource(hotel.getImgHotel());
+        Property property = properties.get(position);
+        holder.txtPlaceToStay.setText(property.getName());
+        holder.getBtnCheckDetails().setOnClickListener(v -> {
+            listener.onItemClick(property);
+        });
+        //Picasso.get().load(property.getImgHotel()).into(holder.imgPlaceToStay);
     }
 
     @Override
     public int getItemCount() {
-        return hotels.size();
+        return properties.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -59,6 +66,10 @@ public class AllPlacesToStayRecViewAdapter extends RecyclerView.Adapter<AllPlace
             imgPlaceToStay = itemView.findViewById(R.id.imgPlaceToStay);
             txtPlaceToStay = itemView.findViewById(R.id.txtPlaceToStay);
             btnCheckDetails = itemView.findViewById(R.id.btnCheckDetails);
+        }
+
+        public Button getBtnCheckDetails() {
+            return btnCheckDetails;
         }
     }
 }

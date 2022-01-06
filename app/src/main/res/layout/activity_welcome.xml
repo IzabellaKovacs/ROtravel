@@ -32,77 +32,76 @@
             android:text="Select your next destination"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="45dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="55dp"
             android:id="@+id/textDestination"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textDestination"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/btnsDestination">
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="53dp"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/red"
-                app:cornerRadius="10dp"
-                app:icon="@drawable/ic_city_icon"
-                android:id="@+id/btnDestinationCity"/>
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/textDestination"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:id="@+id/btnsDestination">-->
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                style="@style/Widget.MaterialComponents.Button.Icon"-->
+<!--                android:layout_width="53dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:backgroundTint="@color/red"-->
+<!--                app:cornerRadius="10dp"-->
+<!--                app:icon="@drawable/ic_city_icon"-->
+<!--                android:id="@+id/btnDestinationCity"/>-->
 
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="53dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="30dp"
-                android:backgroundTint="@color/red"
-                app:cornerRadius="10dp"
-                app:icon="@drawable/ic_hiking_icon"
-                android:id="@+id/btnDestinationHiking"/>
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                style="@style/Widget.MaterialComponents.Button.Icon"-->
+<!--                android:layout_width="53dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:layout_marginStart="30dp"-->
+<!--                android:backgroundTint="@color/red"-->
+<!--                app:cornerRadius="10dp"-->
+<!--                app:icon="@drawable/ic_hiking_icon"-->
+<!--                android:id="@+id/btnDestinationHiking"/>-->
 
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="53dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="30dp"
-                android:backgroundTint="@color/red"
-                app:cornerRadius="10dp"
-                app:icon="@drawable/ic_relax_icon"
-                android:id="@+id/btnDestinationRelax"/>
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                style="@style/Widget.MaterialComponents.Button.Icon"-->
+<!--                android:layout_width="53dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:layout_marginStart="30dp"-->
+<!--                android:backgroundTint="@color/red"-->
+<!--                app:cornerRadius="10dp"-->
+<!--                app:icon="@drawable/ic_relax_icon"-->
+<!--                android:id="@+id/btnDestinationRelax"/>-->
 
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="53dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="30dp"
-                android:backgroundTint="@color/red"
-                app:cornerRadius="10dp"
-                app:icon="@drawable/ic_mountain_icon"
-                android:id="@+id/btnDestinationMountain"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btnsCategories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnsDestination"
-            android:layout_centerInParent="true">
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                style="@style/Widget.MaterialComponents.Button.Icon"-->
+<!--                android:layout_width="53dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:layout_marginStart="30dp"-->
+<!--                android:backgroundTint="@color/red"-->
+<!--                app:cornerRadius="10dp"-->
+<!--                app:icon="@drawable/ic_mountain_icon"-->
+<!--                android:id="@+id/btnDestinationMountain"/>-->
+<!--        </LinearLayout>-->
 
             <RelativeLayout
                 android:id="@+id/btnPlanTrip"
-             android:backgroundTint="@color/blue"
                 android:layout_width="160dp"
                 android:layout_height="250dp"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/shape">
+                android:layout_below="@+id/textDestination"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="100dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/shape"
+                android:backgroundTint="@color/blue">
 
                 <ImageView
                     android:id="@+id/imgViewPlan"
                     android:layout_width="155dp"
                     android:layout_height="189dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="7dp"
                     android:src="@drawable/ic_plan_trip" />
 
                 <Button
@@ -118,14 +117,16 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginTop="5dp"
+                android:layout_below="@+id/textDestination"
                 android:id="@+id/btnFindPlaces"
                 android:layout_width="160dp"
-                android:backgroundTint="@color/yellow"
                 android:layout_height="250dp"
-                android:layout_marginStart="7dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
                 android:background="@drawable/shape"
-                android:layout_marginEnd="7dp">
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="@color/yellow">
 
                 <ImageView
                     android:id="@+id/imgViewPlaces"
@@ -134,49 +135,48 @@
                     android:src="@drawable/ic_find_places" />
 
                 <Button
-                    android:layout_centerInParent="true"
-                    android:padding="0dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/imgViewPlaces"
+                    android:layout_centerInParent="true"
                     android:layout_marginBottom="-31dp"
+                    android:padding="0dp"
                     android:text="Find places nearby"
                     android:textAllCaps="false"
                     android:textColor="@color/textColor"
                     android:textStyle="bold" />
             </RelativeLayout>
-        </LinearLayout>
 
-<!--        <RelativeLayout-->
-<!--            android:id="@+id/btnShare"-->
-<!--            android:layout_width="300dp"-->
-<!--            android:layout_height="155dp"-->
-<!--            android:layout_below="@+id/btnsCategories"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:layout_marginTop="21dp"-->
-<!--            android:background="@drawable/shape"-->
-<!--            android:backgroundTint="@color/red">-->
+        <RelativeLayout
+            android:id="@+id/btnSavedLocations"
+            android:layout_width="300dp"
+            android:layout_height="155dp"
+            android:layout_below="@+id/btnPlanTrip"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/shape"
+            android:backgroundTint="@color/red">
 
-<!--            <ImageView-->
-<!--                android:id="@+id/imgViewShare"-->
-<!--                android:layout_width="150dp"-->
-<!--                android:layout_height="100dp"-->
-<!--                android:layout_alignParentTop="true"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_marginEnd="70dp"-->
-<!--                android:src="@drawable/ic_share" />-->
+            <ImageView
+                android:id="@+id/imgViewShare"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="70dp"
+                android:src="@drawable/ic_saved_loc" />
 
-<!--            <Button-->
-<!--                android:layout_width="300dp"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:layout_alignBottom="@+id/imgViewShare"-->
-<!--                android:layout_marginBottom="-40dp"-->
-<!--                android:padding="0dp"-->
-<!--                android:text="Share your experience to others"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:textColor="@color/textColor"-->
-<!--                android:textStyle="bold" />-->
-<!--        </RelativeLayout>-->
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_alignBottom="@+id/imgViewShare"
+                android:layout_marginBottom="-40dp"
+                android:padding="0dp"
+                android:text="Saved locations"
+                android:textAllCaps="false"
+                android:textColor="@color/textColor"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

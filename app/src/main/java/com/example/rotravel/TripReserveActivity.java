@@ -2,22 +2,25 @@ package com.example.rotravel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.Sampler;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rotravel.HelperClasses.AllCitiesRecViewAdapter;
 import com.example.rotravel.HelperClasses.AllPlacesToStayRecViewAdapter;
-import com.example.rotravel.HelperClasses.BaseMenuActivity;
-import com.example.rotravel.Model.Hotel;
+import com.example.rotravel.Model.Property;
 import com.example.rotravel.Model.Place;
-import com.google.android.material.imageview.ShapeableImageView;
-import com.google.android.material.shape.CornerFamily;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -29,7 +32,9 @@ public class TripReserveActivity extends AppCompatActivity {
     ImageView btnBack;
     ImageView imgView;
     TextView txtPlace, choose;
+
     RecyclerView allPlacesToStay;
+    private DatabaseReference mDatabse;
     AllPlacesToStayRecViewAdapter adapter;
     Place place;
 
@@ -46,37 +51,48 @@ public class TripReserveActivity extends AppCompatActivity {
         choose = findViewById(R.id.choose);
         allPlacesToStay = findViewById(R.id.allPlacesToStay);
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        btnBack.setOnClickListener(v -> onBackPressed());
+
+        mDatabse = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Properties");
 
         showAllPlacesToStay();
 
         Picasso.get().load(place.getImage()).into(imgView);
         txtPlace.setText(place.getName());
 
-        UUID.randomUUID().toString()
     }
 
-
     private void showAllPlacesToStay() {
-        ArrayList<Hotel> hotels = new ArrayList<>();
-        hotels.add(new Hotel(R.drawable.tm, "Hotel Timisoara"));
-        hotels.add(new Hotel(R.drawable.tm, "Hotel Timisoara"));
-        hotels.add(new Hotel(R.drawable.tm, "Hotel Timisoara"));
-        hotels.add(new Hotel(R.drawable.tm, "Hotel Timisoara"));
-        hotels.add(new Hotel(R.drawable.tm, "Hotel Timisoara"));
-        hotels.add(new Hotel(R.drawable.tm, "Hotel Timisoara"));
+        ArrayList<Property> properties = new ArrayList<>();
+        ValueEventListener postListener = new ValueEventListener() {
 
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Property property = dataSnapshot.getValue(Property.class);
+                    if(property.getIdPlace().equals(place.getId()))
+                        properties.add(property);
+                }
 
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled (@NonNull DatabaseError error){
+
+            }
+        };
+
+        mDatabse.addValueEventListener(postListener);
 
         allPlacesToStay.setHasFixedSize(true);
         allPlacesToStay.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        adapter = new AllPlacesToStayRecViewAdapter(this, hotels);
+        adapter = new AllPlacesToStayRecViewAdapter(this, properties, property -> {
+            Intent intent = new Intent(TripReserveActivity.this, PropertyActivity.class);
+            intent.putExtra(PropertyActivity.PROPERTY, property);
+            startActivity(intent);
+        });
         allPlacesToStay.setAdapter(adapter);
     }
 

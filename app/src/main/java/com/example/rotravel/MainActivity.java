@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rotravel.HelperClasses.AllCitiesRecViewAdapter;
+import com.example.rotravel.HelperClasses.ApplicationManager;
 import com.example.rotravel.Model.Place;
 import com.example.rotravel.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.child(uid).getValue(User.class);
+                ApplicationManager.getInstance().setUser(user);
                 startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
             }
 

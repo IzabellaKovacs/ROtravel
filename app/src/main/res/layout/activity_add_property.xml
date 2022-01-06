@@ -8,8 +8,6 @@
     android:id="@+id/drawer_layout"
     tools:context=".AddPropertyActivity">
 
-    <include layout="@layout/main_toolbar"/>
-
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -19,115 +17,157 @@
         android:background="@color/textColor"
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
-        app:headerLayout="@layout/menu_header" />
+        app:headerLayout="@layout/menu_header"
+        android:fitsSystemWindows="true"
+        android:isScrollContainer="true"/>
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <include layout="@layout/main_toolbar"/>
 
-            <LinearLayout
-                android:id="@+id/layoutAddProp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/layoutAddProp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_place_icon"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add a property"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textColor="@color/red"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutProp"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/layoutAddProp"
+                    android:padding="20dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/txtPropertyName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:inputType="text"
+                        android:layout_marginTop="10dp"
+                        android:hint="Property name"
+                        android:textColorHint="@color/grey"
+                        android:textSize="14sp"
+                        android:background="@android:color/transparent"/>
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:background="@color/red" />
+
+                    <EditText
+                        android:id="@+id/txtPricePerNight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:inputType="number"
+                        android:layout_marginTop="10dp"
+                        android:hint="Price per night"
+                        android:textColorHint="@color/grey"
+                        android:textSize="14sp"
+                        android:background="@android:color/transparent"
+                        android:autofillHints="100 lei" />
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:background="@color/red" />
+
+                    <EditText
+                        android:id="@+id/txtDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:inputType="textMultiLine"
+                        android:layout_marginTop="10dp"
+                        android:hint="Description"
+                        android:textColorHint="@color/grey"
+                        android:textSize="14sp"
+                        android:background="@android:color/transparent"
+                        android:autofillHints="100 lei" />
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:background="@color/red" />
+
+                    <Spinner
+                        android:id="@+id/spinnerPlaces"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add photo of the property"
+                        android:layout_marginTop="30dp"
+                        android:textColor="@color/textColor"/>
+
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnChoose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutProp"
+                    android:layout_centerHorizontal="true"
+                    android:backgroundTint="@color/white"
+                    android:text="Choose"
+                    android:textColor="@color/red"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="7dp"
+                    app:strokeColor="@color/red"
+                    app:strokeWidth="2dp" />
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_place_icon"/>
-                <TextView
+                    android:layout_below="@+id/btnChoose"
+                    android:id="@+id/imgView"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="200dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="150dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnUpload"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add a property"
+                    android:backgroundTint="@color/red"
+                    android:layout_below="@+id/imgView"
+                    android:layout_centerHorizontal="true"
+                    android:text="Add property"
                     android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textColor="@color/red"/>
+                    android:textSize="17sp"
+                    app:cornerRadius="7dp" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutProp"
-                android:layout_width="wrap_content"
-                android:layout_below="@+id/layoutAddProp"
-                android:padding="20dp"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/txtPropertyName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:inputType="text"
-                    android:layout_marginTop="10dp"
-                    android:hint="Property name"
-                    android:textColorHint="@color/grey"
-                    android:textSize="14sp"
-                    android:background="@android:color/transparent"/>
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="3dp"
-                    android:background="@color/red" />
-
-                <EditText
-                    android:id="@+id/txtPricePerNight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:inputType="number"
-                    android:layout_marginTop="10dp"
-                    android:hint="Price per night"
-                    android:textColorHint="@color/grey"
-                    android:textSize="14sp"
-                    android:background="@android:color/transparent"
-                    android:autofillHints="100 lei" />
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="3dp"
-                    android:background="@color/red" />
-
-                <EditText
-                    android:id="@+id/txtDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:inputType="textMultiLine"
-                    android:layout_marginTop="10dp"
-                    android:hint="Description"
-                    android:textColorHint="@color/grey"
-                    android:textSize="14sp"
-                    android:background="@android:color/transparent"
-                    android:autofillHints="100 lei" />
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="3dp"
-                    android:background="@color/red" />
-
-                <Spinner
-                    android:id="@+id/spinnerPlaces"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add photo of the property"
-                    android:layout_marginTop="30dp"
-                    android:textColor="@color/textColor"/>
-
-            </LinearLayout>
-
-
-        </RelativeLayout>
-    </ScrollView>
-
-
+            </RelativeLayout>
+        </ScrollView>
+    </LinearLayout>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

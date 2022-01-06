@@ -15,8 +15,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.rotravel.AddPropertyActivity;
 import com.example.rotravel.R;
 import com.example.rotravel.TripPlanActivity;
+import com.example.rotravel.UserProfileActivity;
 import com.example.rotravel.WelcomeActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public abstract class BaseMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -58,6 +60,10 @@ public abstract class BaseMenuActivity extends AppCompatActivity implements Navi
         else {
             redirectActivity(this, WelcomeActivity.class);
         }
+    }
+
+    public void ClickUserProfile(MenuItem item){
+        redirectActivity(this, UserProfileActivity.class);
     }
 
     @Override

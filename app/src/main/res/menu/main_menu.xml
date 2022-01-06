@@ -20,6 +20,7 @@
                     android:id="@+id/nav_profile"
                     android:title="Your profile"
                     android:iconTint="@color/white"
+                    android:onClick="ClickUserProfile"
                     android:icon="@drawable/ic_person_icon"/>
                 <item
                     android:id="@+id/nav_logout"
