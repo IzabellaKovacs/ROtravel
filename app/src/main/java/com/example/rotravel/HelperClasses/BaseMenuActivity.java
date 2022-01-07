@@ -20,6 +20,8 @@ import com.example.rotravel.WelcomeActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+// TO DO: Logout
+
 public abstract class BaseMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     DrawerLayout drawerLayout;
