@@ -55,7 +55,7 @@
                         android:src="@drawable/ic_profile_picture" />
                 </RelativeLayout>
 
-                    <RelativeLayout
+                <RelativeLayout
                         android:layout_centerInParent="true"
                         android:id="@+id/info"
                         android:layout_below="@+id/imgLayout"
@@ -92,11 +92,12 @@
                     </RelativeLayout>
 
                 <LinearLayout
+                    android:id="@+id/reservationsShow"
                     android:layout_width="wrap_content"
                     android:padding="20dp"
                     android:layout_below="@+id/info"
                     android:orientation="vertical"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
@@ -111,9 +112,36 @@
                         android:background="@color/blue" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/allReservations"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/userProperties"
+                    android:layout_width="wrap_content"
+                    android:padding="20dp"
+                    android:layout_below="@+id/reservationsShow"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My properties"
+                        android:textColor="@color/blue"
+                        android:textStyle="bold"
+                        android:textSize="20dp"/>
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:background="@color/blue" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/allProperties"
                         android:layout_marginTop="10dp"/>
                 </LinearLayout>
 

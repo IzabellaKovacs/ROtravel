@@ -83,50 +83,62 @@
 <!--                android:id="@+id/btnDestinationMountain"/>-->
 <!--        </LinearLayout>-->
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/textDestination">
+
             <RelativeLayout
-                android:id="@+id/btnPlanTrip"
-                android:layout_width="160dp"
-                android:layout_height="250dp"
-                android:layout_below="@+id/textDestination"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="100dp"
-                android:layout_marginStart="30dp"
+                android:id="@+id/layoutShare"
+                android:layout_width="300dp"
+                android:layout_height="155dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/shape"
-                android:backgroundTint="@color/blue">
+                android:backgroundTint="@color/red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutPlanTrip">
 
                 <ImageView
-                    android:id="@+id/imgViewPlan"
-                    android:layout_width="155dp"
-                    android:layout_height="189dp"
-                    android:layout_alignParentStart="true"
+                    android:id="@+id/imgViewShare"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="7dp"
-                    android:src="@drawable/ic_plan_trip" />
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="70dp"
+                    android:src="@drawable/ic_share" />
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/imgViewPlan"
-                    android:layout_centerInParent="true"
-                    android:layout_marginBottom="-31dp"
-                    android:text="Plan your trip"
+                    android:id="@+id/btnShareExperience"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp"
+                    android:layout_alignBottom="@+id/imgViewShare"
+                    android:layout_marginBottom="-43dp"
+                    android:backgroundTint="@color/white"
+                    android:padding="0dp"
+                    android:text="Share your experience to others"
                     android:textAllCaps="false"
                     android:textColor="@color/textColor"
                     android:textStyle="bold" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_below="@+id/textDestination"
-                android:id="@+id/btnFindPlaces"
+                android:layout_marginTop="30dp"
+                android:id="@+id/layoutFindPlaces"
                 android:layout_width="160dp"
                 android:layout_height="250dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="30dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="15dp"
                 android:background="@drawable/shape"
-                android:layout_centerHorizontal="true"
-                android:backgroundTint="@color/yellow">
+                android:backgroundTint="@color/yellow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.915"
+                app:layout_constraintStart_toEndOf="@+id/layoutPlanTrip"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.236">
 
                 <ImageView
                     android:id="@+id/imgViewPlaces"
@@ -135,11 +147,13 @@
                     android:src="@drawable/ic_find_places" />
 
                 <Button
+                    android:id="@+id/btnFindPlaces"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/imgViewPlaces"
                     android:layout_centerInParent="true"
-                    android:layout_marginBottom="-31dp"
+                    android:layout_marginBottom="-40dp"
+                    android:backgroundTint="@color/white"
                     android:padding="0dp"
                     android:text="Find places nearby"
                     android:textAllCaps="false"
@@ -147,36 +161,46 @@
                     android:textStyle="bold" />
             </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/btnSavedLocations"
-            android:layout_width="300dp"
-            android:layout_height="155dp"
-            android:layout_below="@+id/btnPlanTrip"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/shape"
-            android:backgroundTint="@color/red">
+            <RelativeLayout
+                android:id="@+id/layoutPlanTrip"
+                android:layout_width="160dp"
+                android:layout_height="250dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="84dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/shape"
+                android:backgroundTint="@color/blue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imgViewShare"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="70dp"
-                android:src="@drawable/ic_saved_loc" />
+                <ImageView
+                    android:id="@+id/imgViewPlan"
+                    android:layout_width="155dp"
+                    android:layout_height="189dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="14dp"
+                    android:src="@drawable/ic_plan_trip" />
 
-            <Button
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:layout_alignBottom="@+id/imgViewShare"
-                android:layout_marginBottom="-40dp"
-                android:padding="0dp"
-                android:text="Saved locations"
-                android:textAllCaps="false"
-                android:textColor="@color/textColor"
-                android:textStyle="bold" />
-        </RelativeLayout>
+                <Button
+                    android:id="@+id/btnPlanTrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imgViewPlan"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="-30dp"
+                    android:backgroundTint="@color/white"
+                    android:text="Plan your trip"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textColor"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </RelativeLayout>
 

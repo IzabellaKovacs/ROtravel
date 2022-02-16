@@ -9,12 +9,12 @@
     android:id="@+id/parent">
 
     <RelativeLayout
-        android:layout_width="350dp"
-        android:layout_height="170dp">
+        android:layout_width="390dp"
+        android:layout_height="250dp">
 
         <ImageView
             android:id="@+id/imgPlace"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/tm"
             android:scaleType="centerCrop"/>

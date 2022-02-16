@@ -3,14 +3,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/parent"
-    android:layout_margin="5dp"
+    android:layout_margin="1dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:id="@+id/cardView"
         app:cardCornerRadius="10dp"
-        android:layout_height="120dp">
+        android:layout_height="190dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -18,9 +18,9 @@
 
         <ImageView
             android:id="@+id/imgPlaceToStay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/tm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/property"
             android:scaleType="centerCrop"/>
 
         <TextView
@@ -30,7 +30,8 @@
             android:layout_height="30dp"
             android:background="#81E4E7ED"
             android:text="Hotel Name"
-            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textSize="16sp"
             android:textAlignment="center"
             android:textColor="@color/white" />
 
@@ -42,8 +43,8 @@
         android:id="@+id/btnCheckDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="70dp"
         android:backgroundTint="@color/white"
         android:text="Check"
         android:textColor="@color/textColor"

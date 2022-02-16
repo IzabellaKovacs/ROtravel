@@ -20,7 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText txtFirstName, txtLastName, txtPhone, txtEmail, txtPassword, txtRePassword;
     MaterialButton btnRegister;
-    private DatabaseReference mDatabse;
+    private DatabaseReference mDatabase;
     FirebaseAuth mAuth;
 
     @Override
@@ -37,7 +37,8 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabse = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("User");
+        mDatabase = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("User");
 
         btnRegister.setOnClickListener(view -> {
             createUser();
@@ -45,15 +46,34 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUser(){
+        String firstName = txtFirstName.getText().toString();
+        String lastName = txtLastName.getText().toString();
+        String phone = txtPhone.getText().toString();
         String email = txtEmail.getText().toString();
         String password = txtPassword.getText().toString();
+        String rePassword = txtRePassword.getText().toString();
 
-        if(TextUtils.isEmpty(email)){
+        if(TextUtils.isEmpty(firstName)) {
+            txtFirstName.setError("First name is required");
+            txtFirstName.requestFocus();
+        }else if(TextUtils.isEmpty(lastName)) {
+            txtLastName.setError("Last name is required");
+            txtLastName.requestFocus();
+        }else if(TextUtils.isEmpty(phone)){
+            txtPhone.setError("Phone number is required");
+            txtPhone.requestFocus();
+        }else if(TextUtils.isEmpty(email)){
             txtEmail.setError("Email is required");
             txtEmail.requestFocus();
-        }else if(TextUtils.isEmpty(password)){
+        }else if(TextUtils.isEmpty(password)) {
             txtPassword.setError("Password is required");
             txtPassword.requestFocus();
+        }else if(TextUtils.isEmpty(rePassword)) {
+            txtRePassword.setError("Password is required");
+            txtRePassword.requestFocus();
+        }else if(!password.equals(rePassword)){
+            txtRePassword.setError("Passwords does not match");
+            txtRePassword.requestFocus();
         }else{
             User user = new User();
             user.setFirstName(txtFirstName.getText().toString());
@@ -61,18 +81,15 @@ public class RegisterActivity extends AppCompatActivity {
             user.setPhone(txtPhone.getText().toString());
             user.setEmail(txtEmail.getText().toString());
 
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(RegisterActivity.this, "User Created",Toast.LENGTH_SHORT).show();
-                        user.setId(task.getResult().getUser().getUid());
-                        mDatabse.child(user.getId()).setValue(user);
-                        startActivity(new Intent(RegisterActivity.this, WelcomeActivity.class));
-                    } else {
-                        Toast.makeText(RegisterActivity.this, " " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        System.out.println(task.getException().getMessage());
-                    }
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(RegisterActivity.this, "User Created",Toast.LENGTH_SHORT).show();
+                    user.setId(task.getResult().getUser().getUid());
+                    mDatabase.child(user.getId()).setValue(user);
+                    startActivity(new Intent(RegisterActivity.this, WelcomeActivity.class));
+                } else {
+                    Toast.makeText(RegisterActivity.this, " " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    System.out.println(task.getException().getMessage());
                 }
             });
         }

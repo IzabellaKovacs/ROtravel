@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "634782823351",
+    "firebase_url": "https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "rotravel-f9f6a",
+    "storage_bucket": "rotravel-f9f6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634782823351:android:49fbd341a446f407442e32",
+        "android_client_info": {
+          "package_name": "com.example.rotravel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634782823351-ric6rh27bdo5skn84b9h6efef8jglf4s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-yfr0-7QC1OMc8TOItScQDXg5OWI5NRA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634782823351-ric6rh27bdo5skn84b9h6efef8jglf4s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

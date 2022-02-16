@@ -50,19 +50,12 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabse = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("User");
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        btnRegister.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginUser();
-            }
-        });
+
+        btnLogin.setOnClickListener(v -> loginUser());
     }
 
     @Override
@@ -85,15 +78,13 @@ public class MainActivity extends AppCompatActivity {
             txtPassword.setError("Password is required");
             txtPassword.requestFocus();
         }else {
-            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        getUser(task.getResult().getUser().getUid());
-                    } else {
-                        Toast.makeText(MainActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        System.out.println(task.getException().getMessage());
-                    }
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+
+                if (task.isSuccessful()) {
+                    getUser(task.getResult().getUser().getUid());
+                } else {
+                    Toast.makeText(MainActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    System.out.println(task.getException().getMessage());
                 }
             });
         }

@@ -1,45 +1,68 @@
 package com.example.rotravel;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.rotravel.HelperClasses.ApplicationManager;
 import com.example.rotravel.HelperClasses.BaseMenuActivity;
 import com.example.rotravel.Model.Place;
 import com.example.rotravel.Model.Property;
+import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class AddPropertyActivity extends BaseMenuActivity {
 
-    EditText txtName;
-    EditText txtPrice;
-    EditText txtDescription;
-    MaterialButton btnChoose;
-    MaterialButton btnUpload;
-    ImageView imageView;
+    //widgets
+    private EditText txtName;
+    private EditText txtPrice;
+    private EditText txtDescription;
+    private ImageView imageView;
+    private MaterialButton btnAddProperty;
 
-    private DatabaseReference mDatabse;
-    DataSnapshot dataSnapshot;
-    ArrayList<Place> places = new ArrayList<>();
+    private DataSnapshot dataSnapshot;
+    private ArrayList<Place> places = new ArrayList<>();
     private Place selectedPlace;
+    private Uri uri;
+
+    //firebase
+    private DatabaseReference referencePlaces;
+
+    private DatabaseReference referenceProperties;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,18 +71,39 @@ public class AddPropertyActivity extends BaseMenuActivity {
         txtName = findViewById(R.id.txtPropertyName);
         txtPrice = findViewById(R.id.txtPricePerNight);
         txtDescription = findViewById(R.id.txtDescription);
-        btnChoose = findViewById(R.id.btnChoose);
-        btnUpload = findViewById(R.id.btnUpload);
-        imageView = findViewById(R.id.imgView);
+        imageView = findViewById(R.id.imageView);
+        btnAddProperty = findViewById(R.id.btnAddProperty);
 
-        // TO DO: Upload photo of the property accessing photo gallery and camera
-
-        mDatabse = FirebaseDatabase.getInstance("https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Places");
+        referencePlaces = FirebaseDatabase.getInstance("https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Places");
+        referenceProperties = FirebaseDatabase.getInstance("https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Properties");
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         setSpinner();
 
-        btnUpload.setOnClickListener(v -> createProperty());
+        imageView.setOnClickListener(v -> {
+            openFileChooser();
+        });
 
+        btnAddProperty.setOnClickListener(v -> createProperty());
+
+    }
+
+    public void openFileChooser(){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, 2);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 2 && resultCode == RESULT_OK && data!=null){
+            uri = data.getData();
+            Picasso.get().load(uri).into(imageView);
+            //imageView.setImageURI(uri);
+        }
     }
 
     private void createProperty() {
@@ -84,7 +128,9 @@ public class AddPropertyActivity extends BaseMenuActivity {
         }else if(TextUtils.isEmpty(price) || num > 100 ){
             txtPrice.setError("Price must be between 10 - 100 ron / night");
             txtPrice.requestFocus();
-        }else {
+        } else if(uri == null){
+            Toast.makeText(this, "Upload image", Toast.LENGTH_SHORT).show();
+        }else{
             Property property = new Property();
             property.setId(UUID.randomUUID().toString());
             property.setIdPlace(selectedPlace.getId());
@@ -93,13 +139,40 @@ public class AddPropertyActivity extends BaseMenuActivity {
             property.setPrice(num);
             property.setDescription(description);
 
-            FirebaseDatabase
-                    .getInstance("https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
-                    .getReference("Properties")
-                    .child(property.getId())
-                    .setValue(property);
+            uploadImageToFirebase(property);
 
-        }
+
+            referenceProperties.child(property.getId()).setValue(property);
+            Toast.makeText(this, "Property added", Toast.LENGTH_SHORT).show();
+        }  
+    }
+
+    private void uploadImageToFirebase(Property property) {
+        StorageReference file = storageReference.child("properties/" + System.currentTimeMillis() + "." + getFileExtension(uri));
+        file.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        String fileLink = task.getResult().toString();
+                        property.setImage(fileLink);
+                        referenceProperties.child(property.getId()).setValue(property);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddPropertyActivity.this, "Upload image failed", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
+    }
+
+    private String getFileExtension(Uri uri) {
+        MimeTypeMap map = MimeTypeMap.getSingleton();
+        return map.getExtensionFromMimeType(getContentResolver().getType(uri));
     }
 
     private void setSpinner() {
@@ -135,9 +208,8 @@ public class AddPropertyActivity extends BaseMenuActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         };
-        mDatabse.addValueEventListener(postListener);
+        referencePlaces.addValueEventListener(postListener);
     }
-
 
     @Override
     public int getLayoutRes() {

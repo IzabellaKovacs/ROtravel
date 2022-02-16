@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -13,14 +12,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.rotravel.AddPropertyActivity;
+import com.example.rotravel.MainActivity;
 import com.example.rotravel.R;
-import com.example.rotravel.TripPlanActivity;
 import com.example.rotravel.UserProfileActivity;
 import com.example.rotravel.WelcomeActivity;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.UserProfileChangeRequest;
-
-// TO DO: Logout
+import com.google.firebase.auth.FirebaseAuth;
 
 public abstract class BaseMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -56,22 +53,27 @@ public abstract class BaseMenuActivity extends AppCompatActivity implements Navi
     }
 
     public void ClickHome(MenuItem item) {
-        if (this instanceof WelcomeActivity) {
+        if(this instanceof WelcomeActivity){
             drawerLayout.closeDrawer(GravityCompat.START);
         }
-        else {
-            redirectActivity(this, WelcomeActivity.class);
-        }
+        else redirectActivity(this, WelcomeActivity.class);
     }
 
     public void ClickUserProfile(MenuItem item){
         redirectActivity(this, UserProfileActivity.class);
     }
 
+    public void ClickLogout(MenuItem item){
+        // when back pressed goes back to the context
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getBaseContext(), MainActivity.class));
+    }
+
+    // TO DO: Implementare functie pentru "Conversations"
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return true;
     }
-
 
 }

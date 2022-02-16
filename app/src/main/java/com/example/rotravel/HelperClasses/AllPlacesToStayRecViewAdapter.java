@@ -47,7 +47,7 @@ public class AllPlacesToStayRecViewAdapter extends RecyclerView.Adapter<AllPlace
         holder.getBtnCheckDetails().setOnClickListener(v -> {
             listener.onItemClick(property);
         });
-        //Picasso.get().load(property.getImgHotel()).into(holder.imgPlaceToStay);
+        Picasso.get().load(property.getImage()).into(holder.imgPlaceToStay);
     }
 
     @Override

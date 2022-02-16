@@ -10,7 +10,7 @@ public class Property implements Parcelable {
     int price;
     String name;
     String description;
-    //String image;
+    String image;
 
     public Property() {}
 
@@ -21,6 +21,7 @@ public class Property implements Parcelable {
         price = in.readInt();
         name = in.readString();
         description = in.readString();
+        image = in.readString();
     }
 
     public static final Creator<Property> CREATOR = new Creator<Property>() {
@@ -43,13 +44,13 @@ public class Property implements Parcelable {
         this.name = name;
     }
 
-//    public String getImage() {
-//        return image;
-//    }
-//
-//    public void setImage(String image) {
-//        this.image = image;
-//    }
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getId() {
         return id;
@@ -104,5 +105,6 @@ public class Property implements Parcelable {
         dest.writeInt(price);
         dest.writeString(name);
         dest.writeString(description);
+        dest.writeString(image);
     }
 }

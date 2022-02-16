@@ -68,8 +68,6 @@ public class AllCitiesRecViewAdapter extends RecyclerView.Adapter<AllCitiesRecVi
             parent = itemView.findViewById(R.id.parent);
             imgPlace = itemView.findViewById(R.id.imgPlace);
             txtPlaceName = itemView.findViewById(R.id.txtPlaceName);
-
         }
     }
-
 }

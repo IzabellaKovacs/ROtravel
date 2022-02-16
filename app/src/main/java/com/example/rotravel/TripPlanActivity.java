@@ -51,7 +51,8 @@ public class TripPlanActivity extends BaseMenuActivity {
         btnSearch = findViewById(R.id.btnSearch);
         txtSearch = findViewById(R.id.txtSearch);
 
-        mDatabse = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Places");
+        mDatabse = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("Places");
 
         showAllPlaces();
 

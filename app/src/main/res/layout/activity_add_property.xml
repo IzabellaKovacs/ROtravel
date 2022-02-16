@@ -129,41 +129,53 @@
 
                 </LinearLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnChoose"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/layoutProp"
-                    android:layout_centerHorizontal="true"
-                    android:backgroundTint="@color/white"
-                    android:text="Choose"
-                    android:textColor="@color/red"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="7dp"
-                    app:strokeColor="@color/red"
-                    app:strokeWidth="2dp" />
-
                 <ImageView
-                    android:layout_below="@+id/btnChoose"
-                    android:id="@+id/imgView"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="200dp"
-                    android:layout_marginBottom="10dp"
+                    android:id="@+id/imageView"
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    android:layout_below="@+id/layoutProp"
                     android:layout_centerHorizontal="true"
-                    android:layout_height="150dp" />
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ic_add_photo" />
 
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/btnUpload"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    android:layout_below="@+id/imageView"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:text="Upload image"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@color/red"-->
+<!--                    app:strokeWidth="3dp"-->
+<!--                    app:strokeColor="@color/red"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="17sp"-->
+<!--                    app:cornerRadius="7dp" />-->
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnUpload"
+                    android:id="@+id/btnAddProperty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/red"
-                    android:layout_below="@+id/imgView"
+                    android:layout_below="@+id/imageView"
                     android:layout_centerHorizontal="true"
                     android:text="Add property"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:strokeWidth="3dp"
+                    app:strokeColor="@color/red"
                     android:textStyle="bold"
                     android:textSize="17sp"
                     app:cornerRadius="7dp" />
+
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/progressBar"
+                    android:indeterminateTint="@android:color/secondary_text_dark"
+                    android:layout_below="@+id/btnAddProperty"/>
 
             </RelativeLayout>
         </ScrollView>

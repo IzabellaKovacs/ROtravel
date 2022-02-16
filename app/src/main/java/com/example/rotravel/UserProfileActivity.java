@@ -31,14 +31,15 @@ public class UserProfileActivity extends BaseMenuActivity {
     TextView txtName;
     TextView txtPhone;
     TextView txtEmail;
+
     RecyclerView allReservations;
+    private AllReservedPropertiesAdapter adapter;
 
     private DatabaseReference mDatabase;
 
-    private ArrayList<Property> reservedProperties = new ArrayList<>();
-    private ArrayList<Reservation> reservations = new ArrayList<>();
+    private final ArrayList<Property> reservedProperties = new ArrayList<>();
+    private final ArrayList<Reservation> reservations = new ArrayList<>();
 
-    private AllReservedPropertiesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +106,9 @@ public class UserProfileActivity extends BaseMenuActivity {
         allReservations.setHasFixedSize(true);
         allReservations.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        adapter = new AllReservedPropertiesAdapter(this, reservedProperties, reservations);
+        adapter = new AllReservedPropertiesAdapter(this, reservedProperties, reservations );
         allReservations.setAdapter(adapter);
+
     }
 
     @Override
@@ -114,5 +116,4 @@ public class UserProfileActivity extends BaseMenuActivity {
         return R.layout.activity_user_profile;
     }
 
-    // TO DO: inflate list with the reservations
 }

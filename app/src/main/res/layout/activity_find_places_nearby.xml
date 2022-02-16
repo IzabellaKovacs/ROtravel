@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FindPlacesNearby">
+
+    <fragment
+        android:layout_below="@+id/placesList"
+        android:layout_marginTop="10dp"
+        android:id="@+id/homeMap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinate"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:elevation="10dp"
+            app:boxBackgroundColor="@color/white"
+            app:boxCornerRadiusBottomEnd="25dp"
+            app:boxCornerRadiusTopEnd="25dp"
+            app:boxCornerRadiusBottomStart="25dp"
+            app:boxCornerRadiusTopStart="25dp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:endIconMode="clear_text"
+            app:hintEnabled="false"
+            app:layout_anchor="@id/view"
+            app:layout_anchorGravity="bottom|center"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtSearchPlaceName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_place_icon"
+                android:drawablePadding="10dp"
+                android:hint="Search Place"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColorHint="@color/grey"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        
+        <View
+            android:layout_marginBottom="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/view"
+            android:background="@drawable/map_background"
+            android:elevation="5dp"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="23dp"
+        app:srcCompat="@drawable/ic_arrow_back" />
+    <HorizontalScrollView
+        android:layout_margin="10dp"
+        android:id="@+id/placesList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coordinate"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:id="@+id/placesGroup"
+            tools:context=".FindPlacesNearby"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            app:singleLine="true"
+            app:singleSelection="true"/>
+
+    </HorizontalScrollView>
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/currentLocation"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/placesList"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_marginEnd="15dp"-->
+<!--        android:src="@drawable/ic_my_location_icon"-->
+<!--        app:backgroundTint="@color/white"-->
+<!--        app:fabCustomSize="40dp"-->
+<!--        app:tint="@color/red" />-->
+
+</RelativeLayout>
