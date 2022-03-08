@@ -66,6 +66,8 @@ public class UserProfileActivity extends BaseMenuActivity {
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                reservations.clear();
+                reservedProperties.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Reservation reservation = dataSnapshot.getValue(Reservation.class);
 
@@ -77,12 +79,14 @@ public class UserProfileActivity extends BaseMenuActivity {
                                 .addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                                         for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                             Property property = dataSnapshot.getValue(Property.class);
 
                                             if(reservation.getIdProperty().equals(property.getId()))
                                                 reservedProperties.add(property);
                                         }
+                                        adapter.notifyDataSetChanged();
                                     }
 
                                     @Override

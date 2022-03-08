@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2972222222222222" />
+        <entry key="app/src/main/res/drawable/ic_add_icon.xml" value="0.15092592592592594" />
         <entry key="app/src/main/res/drawable/ic_arrow_back.xml" value="0.25092592592592594" />
         <entry key="app/src/main/res/drawable/ic_city_icon.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_clock.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/drawable/ic_email.xml" value="0.3807291666666667" />
         <entry key="app/src/main/res/drawable/ic_email_black.xml" value="0.3807291666666667" />
         <entry key="app/src/main/res/drawable/ic_hiking_icon.xml" value="0.4197916666666667" />
@@ -26,22 +28,33 @@
         <entry key="app/src/main/res/drawable/image_view_corner.xml" value="0.265625" />
         <entry key="app/src/main/res/drawable/map_background.xml" value="0.15555555555555556" />
         <entry key="app/src/main/res/drawable/shape.xml" value="0.31354166666666666" />
+        <entry key="app/src/main/res/drawable/shape_v2.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/textview_border.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/font/montserrat.xml" value="0.18518518518518517" />
         <entry key="app/src/main/res/layout-v23/activity_find_places_nearby.xml" value="0.2752808988764045" />
         <entry key="app/src/main/res/layout/activity_add_property.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_find_places_nearby.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.36818181818181817" />
         <entry key="app/src/main/res/layout/activity_navigation_drawer.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/activity_property.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_share_experience.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_trip_plan.xml" value="0.3029045643153527" />
         <entry key="app/src/main/res/layout/activity_trip_reserve.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.296538717558054" />
         <entry key="app/src/main/res/layout/ggg.xml" value="0.24375" />
+        <entry key="app/src/main/res/layout/layout_1.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_2.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/layout_3.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/layout_4.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/layout_5.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_6.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/layout_7.xml" value="0.2351851851851852" />
+        <entry key="app/src/main/res/layout/layout_8.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_city.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_item_reservation.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/list_item_share_photo.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_vity.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/list_reserve_place.xml" value="0.33" />
         <entry key="app/src/main/res/layout/main_nav_drawer.xml" value="0.35208333333333336" />

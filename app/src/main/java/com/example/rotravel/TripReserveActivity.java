@@ -70,6 +70,7 @@ public class TripReserveActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Property property = dataSnapshot.getValue(Property.class);
+                    assert property != null;
                     if(property.getIdPlace().equals(place.getId()))
                         properties.add(property);
                 }

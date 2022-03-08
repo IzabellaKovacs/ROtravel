@@ -89,18 +89,18 @@ public class FindPlacesNearby extends AppCompatActivity implements
 
     }
 
+    @SuppressLint("MissingPermission")
     private void enableMyLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED
-                    && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
+                  ) {
             if (mGoogleMap != null) {
                 mGoogleMap.setMyLocationEnabled(true);
-            } else {
-                // Permission to access the location is missing. Show rationale and request permission
-                AppPermissions.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
-                        Manifest.permission.ACCESS_FINE_LOCATION, true);
             }
+        }else {
+            // Permission to access the location is missing. Show rationale and request permission
+            AppPermissions.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
+                    Manifest.permission.ACCESS_FINE_LOCATION, true);
         }
     }
 

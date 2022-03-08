@@ -34,7 +34,8 @@ public class WelcomeActivity extends BaseMenuActivity {
         });
 
         btnShareExperience.setOnClickListener(v -> {
-
+            Intent intent = new Intent(WelcomeActivity.this, ShareExperienceActivity.class);
+            startActivity(intent);
         });
 
     }

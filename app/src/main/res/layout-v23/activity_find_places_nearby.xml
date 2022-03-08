@@ -59,7 +59,15 @@
             android:background="@drawable/map_background"
             android:elevation="5dp"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="23dp"
+        app:srcCompat="@drawable/ic_arrow_back" />
     <HorizontalScrollView
         android:id="@+id/placesList"
         android:layout_width="match_parent"

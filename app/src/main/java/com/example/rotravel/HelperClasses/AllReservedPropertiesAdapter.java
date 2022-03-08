@@ -57,17 +57,16 @@ public class AllReservedPropertiesAdapter extends RecyclerView.Adapter<AllReserv
 
         holder.deleteButton().setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("Are you sure you want to cancel reservation?");
-            builder.setPositiveButton("Yes", (dialogInterface, i) -> {
-                FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
-                        .getReference("Reservations")
-                        .child(reservations.get(position).getId())
-                        .removeValue();
-            });
+            builder.setMessage("Are you sure you want to cancel reservation?" );
+            builder.setPositiveButton("Yes", (dialogInterface, i) ->
+                    FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
+                    .getReference("Reservations")
+                    .child(reservations.get(position).getId())
+                    .removeValue());
             builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
             builder.show();
+
         });
-        //notifyItemRemoved(position);
     }
 
 

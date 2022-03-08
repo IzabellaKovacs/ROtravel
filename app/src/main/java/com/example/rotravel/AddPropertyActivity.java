@@ -52,6 +52,7 @@ public class AddPropertyActivity extends BaseMenuActivity {
     private EditText txtDescription;
     private ImageView imageView;
     private MaterialButton btnAddProperty;
+    private EditText txtCapacity;
 
     private DataSnapshot dataSnapshot;
     private ArrayList<Place> places = new ArrayList<>();
@@ -73,6 +74,7 @@ public class AddPropertyActivity extends BaseMenuActivity {
         txtDescription = findViewById(R.id.txtDescription);
         imageView = findViewById(R.id.imageView);
         btnAddProperty = findViewById(R.id.btnAddProperty);
+        txtCapacity = findViewById(R.id.txtCapacity);
 
         referencePlaces = FirebaseDatabase.getInstance("https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Places");
         referenceProperties = FirebaseDatabase.getInstance("https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Properties");
@@ -102,7 +104,6 @@ public class AddPropertyActivity extends BaseMenuActivity {
         if(requestCode == 2 && resultCode == RESULT_OK && data!=null){
             uri = data.getData();
             Picasso.get().load(uri).into(imageView);
-            //imageView.setImageURI(uri);
         }
     }
 
@@ -110,12 +111,24 @@ public class AddPropertyActivity extends BaseMenuActivity {
         String name = txtName.getText().toString();
         String description = txtDescription.getText().toString();
         String price = txtPrice.getText().toString();
-        int num = 0;
+        String capacity = txtCapacity.getText().toString();
+
+        int num;
+        int maxCap;
+
         try{
            num = Integer.parseInt(price);
         }catch(Exception e){
             txtPrice.setError("Price is required");
             txtPrice.requestFocus();
+            return;
+        }
+
+        try{
+            maxCap = Integer.parseInt(capacity);
+        }catch(Exception e){
+            txtCapacity.setError("Capacity is required");
+            txtCapacity.requestFocus();
             return;
         }
 
@@ -138,36 +151,26 @@ public class AddPropertyActivity extends BaseMenuActivity {
             property.setName(name);
             property.setPrice(num);
             property.setDescription(description);
+            property.setCapacity(maxCap);
 
             uploadImageToFirebase(property);
 
-
             referenceProperties.child(property.getId()).setValue(property);
+
             Toast.makeText(this, "Property added", Toast.LENGTH_SHORT).show();
         }  
     }
 
     private void uploadImageToFirebase(Property property) {
         StorageReference file = storageReference.child("properties/" + System.currentTimeMillis() + "." + getFileExtension(uri));
-        file.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        file.putFile(uri).addOnSuccessListener(taskSnapshot -> taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        String fileLink = task.getResult().toString();
-                        property.setImage(fileLink);
-                        referenceProperties.child(property.getId()).setValue(property);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddPropertyActivity.this, "Upload image failed", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
+            public void onComplete(@NonNull Task<Uri> task) {
+                String fileLink = task.getResult().toString();
+                property.setImage(fileLink);
+                referenceProperties.child(property.getId()).setValue(property);
             }
-        });
+        }).addOnFailureListener(e -> Toast.makeText(AddPropertyActivity.this, "Upload image failed", Toast.LENGTH_SHORT).show()));
     }
 
     private String getFileExtension(Uri uri) {

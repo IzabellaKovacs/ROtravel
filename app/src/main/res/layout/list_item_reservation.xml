@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:text="Property name"
+            android:textStyle="bold"
             android:textSize="15sp"
             android:textColor="@color/textColor"/>
 
@@ -22,8 +23,8 @@
             android:id="@+id/txtReservedPropertyDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/txtReservedPropertyName"
             android:text="Date"
             android:textColor="@color/textColor"
             android:textSize="15sp" />

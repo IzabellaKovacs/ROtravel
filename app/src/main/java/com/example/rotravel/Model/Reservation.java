@@ -5,6 +5,8 @@ public class Reservation {
     String idProperty;
     String idUser;
     String date;
+    String total;
+    int totalCapacity;
 
     public Reservation(){ }
 
@@ -38,6 +40,22 @@ public class Reservation {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
+    public int getTotalCapacity() {
+        return totalCapacity;
+    }
+
+    public void setTotalCapacity(int totalCapacity) {
+        this.totalCapacity = totalCapacity;
     }
 }
 

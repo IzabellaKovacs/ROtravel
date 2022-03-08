@@ -8,12 +8,6 @@
             android:onClick="ClickHome" />
 
         <item
-            android:id="@+id/chat"
-            android:title="Conversations"
-            android:icon="@drawable/ic_chat_icon"
-            />
-
-        <item
             android:id="@+id/nav_add_property"
             android:title="Add a property"
             android:icon="@drawable/ic_place_icon"

@@ -64,12 +64,10 @@ public abstract class BaseMenuActivity extends AppCompatActivity implements Navi
     }
 
     public void ClickLogout(MenuItem item){
-        // when back pressed goes back to the context
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(getBaseContext(), MainActivity.class));
     }
 
-    // TO DO: Implementare functie pentru "Conversations"
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

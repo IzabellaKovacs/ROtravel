@@ -114,6 +114,30 @@
                         android:layout_height="3dp"
                         android:background="@color/red" />
 
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Capacity: "
+                            android:textColor="@color/red"
+                            android:textStyle="bold"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txtCapacity"
+                            android:layout_marginStart="10dp"
+                            android:hint="ex. 2, 30"
+                            android:inputType="number"
+                            android:textSize="14sp"
+                            android:background="@android:color/transparent"/>
+
+                    </LinearLayout>
+
                     <Spinner
                         android:id="@+id/spinnerPlaces"
                         android:layout_width="match_parent"
