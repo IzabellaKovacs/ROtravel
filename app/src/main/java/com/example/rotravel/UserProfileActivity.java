@@ -2,35 +2,34 @@ package com.example.rotravel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rotravel.HelperClasses.AllCitiesRecViewAdapter;
 import com.example.rotravel.HelperClasses.AllReservedPropertiesAdapter;
 import com.example.rotravel.HelperClasses.ApplicationManager;
 import com.example.rotravel.HelperClasses.BaseMenuActivity;
 import com.example.rotravel.Model.Property;
 import com.example.rotravel.Model.Reservation;
 import com.example.rotravel.Model.User;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.AbstractCollection;
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class UserProfileActivity extends BaseMenuActivity {
 
-    TextView txtName;
-    TextView txtPhone;
-    TextView txtEmail;
+    // Widgets
+    private TextView txtName;
+    private TextView txtPhone;
+    private TextView txtEmail;
+    private MaterialButton btnMyProperties;
 
     RecyclerView allReservations;
     private AllReservedPropertiesAdapter adapter;
@@ -40,7 +39,6 @@ public class UserProfileActivity extends BaseMenuActivity {
     private final ArrayList<Property> reservedProperties = new ArrayList<>();
     private final ArrayList<Reservation> reservations = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +47,7 @@ public class UserProfileActivity extends BaseMenuActivity {
         txtPhone = findViewById(R.id.txtPhone);
         txtEmail = findViewById(R.id.txtEmail);
         allReservations = findViewById(R.id.allReservations);
+        btnMyProperties = findViewById(R.id.btnMyProperties);
 
         User user = ApplicationManager.getInstance().getUser();
         String fullName = user.getFirstName() + " " + user.getLastName();
@@ -57,7 +56,14 @@ public class UserProfileActivity extends BaseMenuActivity {
         txtPhone.setText(user.getPhone());
         txtEmail.setText(user.getEmail());
 
+
+        btnMyProperties.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), UserPropertiesActivity.class);
+            startActivity(intent);
+        });
+
         mDatabase = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Reservations");
+
         showReservations();
     }
 
@@ -85,6 +91,7 @@ public class UserProfileActivity extends BaseMenuActivity {
 
                                             if(reservation.getIdProperty().equals(property.getId()))
                                                 reservedProperties.add(property);
+
                                         }
                                         adapter.notifyDataSetChanged();
                                     }
@@ -104,6 +111,7 @@ public class UserProfileActivity extends BaseMenuActivity {
 
             }
         };
+
 
         mDatabase.addValueEventListener(postListener);
 

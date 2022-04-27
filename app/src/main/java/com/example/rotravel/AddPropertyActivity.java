@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,10 +21,7 @@ import com.example.rotravel.HelperClasses.ApplicationManager;
 import com.example.rotravel.HelperClasses.BaseMenuActivity;
 import com.example.rotravel.Model.Place;
 import com.example.rotravel.Model.Property;
-import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
@@ -34,14 +30,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 public class AddPropertyActivity extends BaseMenuActivity {
@@ -61,7 +53,6 @@ public class AddPropertyActivity extends BaseMenuActivity {
 
     //firebase
     private DatabaseReference referencePlaces;
-
     private DatabaseReference referenceProperties;
     private StorageReference storageReference;
 
@@ -192,7 +183,6 @@ public class AddPropertyActivity extends BaseMenuActivity {
         });
 
         ValueEventListener postListener = new ValueEventListener(){
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataSnapshot = snapshot;
@@ -200,10 +190,11 @@ public class AddPropertyActivity extends BaseMenuActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Place place = dataSnapshot.getValue(Place.class);
                     places.add(place);
+                    assert place != null;
                     names.add(place.getName());
                 }
                 selectedPlace = places.get(0);
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddPropertyActivity.this, R.layout.support_simple_spinner_dropdown_item, names);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(AddPropertyActivity.this, R.layout.support_simple_spinner_dropdown_item, names);
                 spinner.setAdapter(adapter);
             }
 
@@ -218,4 +209,5 @@ public class AddPropertyActivity extends BaseMenuActivity {
     public int getLayoutRes() {
         return R.layout.activity_add_property;
     }
+
 }

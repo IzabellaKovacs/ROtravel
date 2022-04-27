@@ -21,6 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ROtravel">
         <activity
+            android:name=".MadeReservationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserPropertiesActivity"
+            android:exported="false" />
+        <activity
             android:name=".ShareExperienceActivity"
             android:exported="false" />
         <activity

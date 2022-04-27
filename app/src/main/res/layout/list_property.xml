@@ -1,0 +1,85 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/parent"
+    android:layout_margin="1dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:id="@+id/cardView"
+        android:layout_weight="1"
+        app:cardCornerRadius="10dp"
+        android:layout_height="190dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgProperty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/property"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/txtPropertyName"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#81E4E7ED"
+                android:text="Property Name"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCheckDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:backgroundTint="@color/white"
+                android:text="Details"
+                android:textAllCaps="false"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:cornerRadius="7dp"
+                app:icon="@drawable/ic_info_icon"
+                app:iconTint="@color/blue"
+                app:strokeColor="@color/lightBlue"
+                app:strokeWidth="2dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCheckReservations"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:backgroundTint="@color/lightBlue"
+                android:text="Reservations"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:cornerRadius="7dp"
+                app:icon="@drawable/ic_hotel"
+                app:iconTint="@color/blue"
+              />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
