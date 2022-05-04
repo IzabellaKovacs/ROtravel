@@ -55,7 +55,7 @@ public class AllPlacesToStayRecViewAdapter extends RecyclerView.Adapter<AllPlace
         return properties.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imgPlaceToStay;
         TextView txtPlaceToStay;
         Button btnCheckDetails;

@@ -42,10 +42,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_place_icon"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -64,51 +60,77 @@
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/txtPropertyName"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:inputType="text"
-                        android:layout_marginTop="10dp"
-                        android:hint="Property name"
-                        android:textColorHint="@color/grey"
-                        android:textSize="14sp"
-                        android:background="@android:color/transparent"/>
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_home_icon"
+                            app:tint="@color/blue"/>
+                        <EditText
+                            android:id="@+id/txtPropertyName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:inputType="text"
+                            android:hint="Property name"
+                            android:textSize="14sp"
+                            android:background="@android:color/transparent"/>
+                    </LinearLayout>
                     <View
                         android:layout_width="wrap_content"
                         android:layout_height="3dp"
                         android:background="@color/red" />
 
-                    <EditText
-                        android:id="@+id/txtPricePerNight"
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:inputType="number"
-                        android:layout_marginTop="10dp"
-                        android:hint="Price per night"
-                        android:textColorHint="@color/grey"
-                        android:textSize="14sp"
-                        android:background="@android:color/transparent"
-                        android:autofillHints="100 lei" />
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:tint="@color/blue"
+                            android:src="@drawable/ic_payment_icon"/>
+                        <EditText
+                            android:id="@+id/txtPricePerNight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:inputType="number"
+                            android:hint="Price per night"
+                            android:textSize="14sp"
+                            android:background="@android:color/transparent"
+                            android:autofillHints="100 lei" />
+                    </LinearLayout>
                     <View
                         android:layout_width="wrap_content"
                         android:layout_height="3dp"
                         android:background="@color/red" />
 
-                    <EditText
-                        android:id="@+id/txtDescription"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:inputType="textMultiLine"
-                        android:layout_marginTop="10dp"
-                        android:hint="Description"
-                        android:textColorHint="@color/grey"
-                        android:textSize="14sp"
-                        android:background="@android:color/transparent"
-                        android:autofillHints="100 lei" />
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_description_icon"
+                            app:tint="@color/blue"/>
+                        <EditText
+                            android:id="@+id/txtDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:inputType="textMultiLine"
+                            android:hint="Description"
+                            android:textSize="14sp"
+                            android:background="@android:color/transparent"
+                            android:autofillHints="100 lei" />
+                    </LinearLayout>
                     <View
                         android:layout_width="wrap_content"
                         android:layout_height="3dp"
@@ -120,23 +142,39 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Capacity: "
-                            android:textColor="@color/red"
-                            android:textStyle="bold"/>
+                       <ImageView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/ic_people_icon"
+                           app:tint="@color/blue"/>
                         <EditText
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/txtCapacity"
-                            android:layout_marginStart="10dp"
-                            android:hint="ex. 2, 30"
+                            android:layout_marginStart="5dp"
+                            android:hint="Capacity"
                             android:inputType="number"
                             android:textSize="14sp"
                             android:background="@android:color/transparent"/>
-
                     </LinearLayout>
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:background="@color/red" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="70dp"
+                            android:text="Add marker on the map"
+                            android:layout_marginTop="10dp"
+                            android:backgroundTint="@color/white"
+                            android:textColor="@color/blue"
+                            app:icon="@drawable/ic_my_location_icon"
+                            app:iconTint="@color/blue"
+                            app:strokeWidth="3dp"
+                            app:cornerRadius="7dp"
+                            app:strokeColor="@color/blue"
+                            android:textStyle="bold"/>
 
                     <Spinner
                         android:id="@+id/spinnerPlaces"
@@ -148,7 +186,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Add photo of the property"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="20dp"
                         android:textColor="@color/textColor"/>
 
                 </LinearLayout>
@@ -159,29 +197,13 @@
                     android:layout_height="200dp"
                     android:layout_below="@+id/layoutProp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:src="@drawable/ic_add_photo" />
 
-<!--                <com.google.android.material.button.MaterialButton-->
-<!--                    android:id="@+id/btnUpload"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:backgroundTint="@color/white"-->
-<!--                    android:layout_below="@+id/imageView"-->
-<!--                    android:layout_centerHorizontal="true"-->
-<!--                    android:text="Upload image"-->
-<!--                    android:textAllCaps="false"-->
-<!--                    android:textColor="@color/red"-->
-<!--                    app:strokeWidth="3dp"-->
-<!--                    app:strokeColor="@color/red"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:textSize="17sp"-->
-<!--                    app:cornerRadius="7dp" />-->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAddProperty"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:backgroundTint="@color/red"
                     android:layout_below="@+id/imageView"
                     android:layout_centerHorizontal="true"
@@ -193,13 +215,6 @@
                     android:textStyle="bold"
                     android:textSize="17sp"
                     app:cornerRadius="7dp" />
-
-                <ProgressBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/progressBar"
-                    android:indeterminateTint="@android:color/secondary_text_dark"
-                    android:layout_below="@+id/btnAddProperty"/>
 
             </RelativeLayout>
         </ScrollView>

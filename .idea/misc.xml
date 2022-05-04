@@ -11,6 +11,8 @@
         <entry key="app/src/main/res/drawable/ic_email.xml" value="0.3807291666666667" />
         <entry key="app/src/main/res/drawable/ic_email_black.xml" value="0.3807291666666667" />
         <entry key="app/src/main/res/drawable/ic_hiking_icon.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_home_icon.xml" value="0.37864583333333335" />
+        <entry key="app/src/main/res/drawable/ic_hotel.xml" value="0.37864583333333335" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2972222222222222" />
         <entry key="app/src/main/res/drawable/ic_lock.xml" value="0.27314814814814814" />
         <entry key="app/src/main/res/drawable/ic_lock_black_24dp.xml" value="0.3807291666666667" />
@@ -32,8 +34,9 @@
         <entry key="app/src/main/res/drawable/textview_border.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/font/montserrat.xml" value="0.18518518518518517" />
         <entry key="app/src/main/res/layout-v23/activity_find_places_nearby.xml" value="0.2752808988764045" />
-        <entry key="app/src/main/res/layout/activity_add_property.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_add_property.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_find_places_nearby.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_made_reservations.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.36818181818181817" />
         <entry key="app/src/main/res/layout/activity_navigation_drawer.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/activity_property.xml" value="0.33" />
@@ -42,6 +45,7 @@
         <entry key="app/src/main/res/layout/activity_trip_plan.xml" value="0.3029045643153527" />
         <entry key="app/src/main/res/layout/activity_trip_reserve.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_user_properties.xml" value="0.3569230769230769" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.296538717558054" />
         <entry key="app/src/main/res/layout/ggg.xml" value="0.24375" />
         <entry key="app/src/main/res/layout/layout_1.xml" value="0.25" />
@@ -56,6 +60,8 @@
         <entry key="app/src/main/res/layout/list_item_reservation.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_item_share_photo.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_vity.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/list_made_reservation.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/list_property.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_reserve_place.xml" value="0.33" />
         <entry key="app/src/main/res/layout/main_nav_drawer.xml" value="0.35208333333333336" />
         <entry key="app/src/main/res/layout/main_toolbar.xml" value="0.35208333333333336" />

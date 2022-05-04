@@ -75,7 +75,7 @@ public class AllReservedPropertiesAdapter extends RecyclerView.Adapter<AllReserv
         return properties.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         MaterialCardView parent;
         TextView txtReservedPropertyName;
         TextView txtReservedPropertyDate;

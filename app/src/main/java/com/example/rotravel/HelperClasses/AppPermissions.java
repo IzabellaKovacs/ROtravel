@@ -21,17 +21,6 @@ import com.example.rotravel.R;
 
 public abstract class AppPermissions {
 
-
-//    public boolean isLocationOk(Context context) {
-//        return ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-//    }
-//
-//    @RequiresApi(api = Build.VERSION_CODES.Q)
-//    public void requestLocationPermission(Activity activity) {
-//        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-//                Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION}, AllConstants.LOCATION_REQUEST_CODE);
-//    }
-
     public static void requestPermission(AppCompatActivity activity, int requestId,
                                          String permission, boolean finishActivity) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {

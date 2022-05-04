@@ -76,16 +76,22 @@ public class FindPlacesNearby extends AppCompatActivity implements
             chip.setChipStrokeWidth(4);
 
             placesGroup.addView(chip);
+
         }
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
        mGoogleMap = googleMap;
-       //mGoogleMap.setMyLocationEnabled(true);
-//       mGoogleMap.setOnMyLocationButtonClickListener(this);
-//       mGoogleMap.setOnMyLocationClickListener(this);
        enableMyLocation();
+       mGoogleMap.setOnMapClickListener(latLng -> {
+           MarkerOptions markerOptions = new MarkerOptions();
+           markerOptions.position(latLng);
+           markerOptions.title(latLng.latitude + " : " + latLng.longitude);
+           mGoogleMap.clear();
+           mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+           mGoogleMap.addMarker(markerOptions);
+       });
 
     }
 
@@ -103,17 +109,6 @@ public class FindPlacesNearby extends AppCompatActivity implements
                     Manifest.permission.ACCESS_FINE_LOCATION, true);
         }
     }
-
-//    @Override
-//    public boolean onMyLocationButtonClick() {
-//        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
-//        return false;
-//    }
-
-//    @Override
-//    public void onMyLocationClick(@NonNull Location location) {
-//        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
-//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
