@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="350dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="@dimen/cardview_default_radius"
+    android:layout_margin="5dp"
+    android:layout_height="200dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/blueScreen"
+        android:padding="15dp">
+
+
+        <LinearLayout
+            android:id="@+id/payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_payment_icon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total payment "
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:textSize="17sp" />
+            <TextView
+                android:id="@+id/txtTotalPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="100 "
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:text="lei "
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/payment"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_calendar_icon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date "
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:textSize="17sp" />
+            <TextView
+                android:id="@+id/txtSelectedDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="10 mar - 13 mar "
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/capacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/date"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:tint="@color/blue"
+                android:src="@drawable/ic_people_icon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Capacity "
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:textSize="17sp" />
+            <TextView
+                android:id="@+id/txtCapacity2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="10 "
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/reservedByWho"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/capacity"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:tint="@color/red"
+                android:src="@drawable/ic_phone_icon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact "
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:textSize="17sp" />
+            <TextView
+                android:id="@+id/txtPhoneUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="05463426 "
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:textSize="17sp" />
+            <TextView
+                android:id="@+id/txtFullNameUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Harry Potter "
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

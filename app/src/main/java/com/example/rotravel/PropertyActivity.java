@@ -37,12 +37,12 @@ import java.util.concurrent.TimeUnit;
 
 public class PropertyActivity extends AppCompatActivity {
 
-    TextView txtPropertyName;
-    TextView txtPropertyDescription;
-    TextView txtPropertyPrice;
-    TextView txtDateSelected;
-    TextView txtTotalPayment;
-    TextView txtMaxCapacity;
+    private TextView txtPropertyName;
+    private TextView txtPropertyDescription;
+    private TextView txtPropertyPrice;
+    private TextView txtDateSelected;
+    private TextView txtTotalPayment;
+    private TextView txtMaxCapacity;
     ImageView imageProperty;
     ImageView btnBack;
     MaterialButton btnSelectDate;
@@ -52,7 +52,10 @@ public class PropertyActivity extends AppCompatActivity {
     Property property;
     private DatabaseReference mDatabase;
     int numDay;
-    String payment;
+    int maxCap;
+    int payment;
+    String totalPayment;
+    String capacityEntered;
     MaterialDatePicker<Pair<Long, Long>> datePicker;
     public static String PROPERTY = "property";
 
@@ -92,21 +95,29 @@ public class PropertyActivity extends AppCompatActivity {
             long numDays = last - first;
             numDay = (int) TimeUnit.MILLISECONDS.toDays(numDays);
 
-            payment = numDay*property.getPrice() + "";
+            payment = numDay*property.getPrice();
+            capacityEntered = txtEnterCapacity.getText().toString();
+
+            try{
+                maxCap = Integer.parseInt(capacityEntered);
+            }catch(Exception e){
+                txtEnterCapacity.setError("Capacity is required");
+                txtEnterCapacity.requestFocus();
+                return;
+            }
+
+            totalPayment = payment* maxCap + "";
+
+            txtTotalPayment.setText(totalPayment);
             txtDateSelected.setText(datePicker.getHeaderText());
-            txtTotalPayment.setText(payment);
         });
 
-
+        // Show property details
         txtPropertyName.setText(property.getName());
-
         txtPropertyDescription.setText(property.getDescription());
-
         String price = String.valueOf(property.getPrice());
         txtPropertyPrice.setText(price);
-
         Picasso.get().load(property.getImage()).into(imageProperty);
-
         String capacity = String.valueOf(property.getCapacity());
         txtMaxCapacity.setText(capacity);
 
@@ -117,16 +128,6 @@ public class PropertyActivity extends AppCompatActivity {
 
     private void reserve() {
         Reservation newReservation = new Reservation();
-
-//        String capacityEntered = txtEnterCapacity.getText().toString();
-//        int maxCap;
-//        try{
-//            maxCap = Integer.parseInt(capacityEntered);
-//        }catch(Exception e){
-//            txtEnterCapacity.setError("Capacity is required");
-//            txtEnterCapacity.requestFocus();
-//            return;
-//        }
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -148,13 +149,15 @@ public class PropertyActivity extends AppCompatActivity {
                         btnReserve.setOnClickListener(v -> {
                             if(numDay == 0){
                                 Toast.makeText(PropertyActivity.this, "You must select a date", Toast.LENGTH_LONG).show();
+                            }else if(maxCap == 0){
+                                Toast.makeText(PropertyActivity.this, "You must enter capacity", Toast.LENGTH_LONG).show();
                             } else {
                                 newReservation.setId(UUID.randomUUID().toString());
                                 newReservation.setIdProperty(property.getId());
                                 newReservation.setIdUser(ApplicationManager.getInstance().getUser().getId());
                                 newReservation.setDate(txtDateSelected.getText().toString());
                                 newReservation.setTotal(txtTotalPayment.getText().toString());
-                              //  newReservation.setTotalCapacity(maxCap);
+                                newReservation.setTotalCapacity(maxCap);
 
                                 mDatabase.child(newReservation.getId()).setValue(newReservation);
                             }
