@@ -2,12 +2,21 @@ package com.example.rotravel;
 
 import androidx.annotation.NonNull;
 import android.annotation.SuppressLint;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.util.Pair;
 
+import android.os.Parcelable;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,6 +63,7 @@ public class PropertyActivity extends AppCompatActivity {
     int numDay;
     int maxCap;
     int payment;
+    long first, last;
     String totalPayment;
     String capacityEntered;
     MaterialDatePicker<Pair<Long, Long>> datePicker;
@@ -89,8 +99,8 @@ public class PropertyActivity extends AppCompatActivity {
 
         btnSelectDate.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER"));
         datePicker.addOnPositiveButtonClickListener(selection -> {
-            long first = selection.first;
-            long last = selection.second;
+            first = selection.first;
+            last = selection.second;
 
             long numDays = last - first;
             numDay = (int) TimeUnit.MILLISECONDS.toDays(numDays);
@@ -152,12 +162,17 @@ public class PropertyActivity extends AppCompatActivity {
                             }else if(maxCap == 0){
                                 Toast.makeText(PropertyActivity.this, "You must enter capacity", Toast.LENGTH_LONG).show();
                             } else {
+
                                 newReservation.setId(UUID.randomUUID().toString());
                                 newReservation.setIdProperty(property.getId());
                                 newReservation.setIdUser(ApplicationManager.getInstance().getUser().getId());
                                 newReservation.setDate(txtDateSelected.getText().toString());
+                                newReservation.setFirst(first);
+                                newReservation.setLast(last);
                                 newReservation.setTotal(txtTotalPayment.getText().toString());
                                 newReservation.setTotalCapacity(maxCap);
+
+                                //waitResponseForReservation(newReservation);
 
                                 mDatabase.child(newReservation.getId()).setValue(newReservation);
                             }
@@ -175,5 +190,56 @@ public class PropertyActivity extends AppCompatActivity {
 
         mDatabase.addValueEventListener(postListener);
     }
+
+//    private void waitResponseForReservation(Reservation newReservation) {
+//        if(ApplicationManager.getInstance().getUser().getId().equals(property.getIdUser())) {
+//            NotificationManager manager = (NotificationManager)
+//                    getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//            // Initialize intent for yes button
+//            Intent intent1 = new Intent(PropertyActivity.this, MadeReservationsActivity.class);
+//            intent1.putExtra("yes", true);
+//            intent1.putExtra(MadeReservationsActivity.RESPONSE, newReservation);
+//            intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent1 = PendingIntent.getActivity(
+//                    PropertyActivity.this, 0, intent1, PendingIntent.FLAG_ONE_SHOT);
+//
+//            // Initialize intent for no button
+//            Intent intent2 = new Intent(PropertyActivity.this, MadeReservationsActivity.class);
+//            intent2.putExtra("no", false);
+//            intent2.putExtra(MadeReservationsActivity.RESPONSE, newReservation);
+//            intent2.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent2 = PendingIntent.getActivity(
+//                    PropertyActivity.this, 0, intent2, PendingIntent.FLAG_ONE_SHOT);
+//
+//            // Get default ringtone uri
+//            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//            //Initialize notification builder
+//            NotificationCompat.Builder builder = new NotificationCompat.Builder(
+//                    PropertyActivity.this, getString(R.string.app_name));
+//            // Set notification title
+//            builder.setContentTitle("Reservation request");
+//            // Set content text
+//            if (newReservation.getIdProperty().equals(property.getId()))
+//                builder.setContentText("Reservation at " + property.getName() + ", date: " + newReservation.getDate());
+//            // Set icon
+//            builder.setSmallIcon(R.drawable.ic_notifications_ic);
+//            // Set sound
+//            builder.setSound(uri);
+//            // Set auto cancel
+//            builder.setAutoCancel(true);
+//            // Set priority
+//            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+//
+//            builder.addAction(R.drawable.ic_launcher_foreground, "Yes", pendingIntent1);
+//            builder.addAction(R.drawable.ic_launcher_foreground, "No", pendingIntent2);
+//
+//            // Notification manager
+//            manager.notify(1, builder.build());
+//        }
+//
+//        Intent intent = new Intent(PropertyActivity.this, MadeReservationsActivity.class);
+//        intent.putExtra(MadeReservationsActivity.RESPONSE, newReservation);
+//    }
 
 }

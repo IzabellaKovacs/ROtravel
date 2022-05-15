@@ -165,6 +165,7 @@
                         <com.google.android.material.button.MaterialButton
                             android:layout_width="wrap_content"
                             android:layout_height="70dp"
+                            android:id="@+id/addMarker"
                             android:text="Add marker on the map"
                             android:layout_marginTop="10dp"
                             android:backgroundTint="@color/white"

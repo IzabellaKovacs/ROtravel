@@ -8,10 +8,12 @@ import androidx.core.content.res.ResourcesCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
@@ -37,8 +40,12 @@ public class FindPlacesNearby extends AppCompatActivity implements
         OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
-    private ChipGroup placesGroup;
     private ImageView btnBack;
+    private MaterialButton save;
+
+    private boolean canAddMarker = false;
+    private double lat;
+    private double lng;
 
     private GoogleMap mGoogleMap;
     private boolean permissionDenied = false;
@@ -49,50 +56,55 @@ public class FindPlacesNearby extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_places_nearby);
 
+        if (getIntent() != null && getIntent().getExtras() != null ) {
+            canAddMarker = getIntent().getExtras().getBoolean("ADD_MARKER", false);
+            if (!canAddMarker) {
+                save.setVisibility(View.GONE);
+            }
+        }
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            lat = getIntent().getExtras().getDouble("LAT", 0);
+            lat = getIntent().getExtras().getDouble("LNG", 0);
+        }
+
         btnBack = findViewById(R.id.btnBack);
-        placesGroup = findViewById(R.id.placesGroup);
-        initChips();
+        save = findViewById(R.id.saveMarker);
 
         btnBack.setOnClickListener(v -> onBackPressed());
+        save.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.putExtra("LAT", lat);
+            intent.putExtra("LNG", lng);
+            setResult(RESULT_OK, intent);
+            finish();
+        });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.homeMap);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
-    }
 
-    public void initChips() {
-        for (NearbyPlace nearbyPlace : AllConstants.nearbyPlacesName) {
-            Chip chip = new Chip(this);
-            chip.setText(nearbyPlace.getName());
-            chip.setId(nearbyPlace.getId());
-            chip.setPadding(8, 8, 8, 8);
-            chip.setTextColor(getResources().getColor(R.color.blue));
-            chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)));
-            chip.setChipIconTint(ColorStateList.valueOf(getResources().getColor(R.color.blue)));
-            chip.setChipIcon(ResourcesCompat.getDrawable(getResources(), nearbyPlace.getDrawableId(), null));
-            chip.setCheckable(true);
-            chip.setChipStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.yellow)));
-            chip.setChipStrokeWidth(4);
-
-            placesGroup.addView(chip);
-
-        }
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
        mGoogleMap = googleMap;
        enableMyLocation();
-       mGoogleMap.setOnMapClickListener(latLng -> {
-           MarkerOptions markerOptions = new MarkerOptions();
-           markerOptions.position(latLng);
-           markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-           mGoogleMap.clear();
-           mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-           mGoogleMap.addMarker(markerOptions);
-       });
-
+       if (lat != 0 && lng != 0) {
+           mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 16));
+       }
+       if (canAddMarker) {
+           mGoogleMap.setOnMapClickListener(latLng -> {
+               lat = latLng.latitude;
+               lng = latLng.longitude;
+               MarkerOptions markerOptions = new MarkerOptions();
+               markerOptions.position(latLng);
+               markerOptions.title(latLng.latitude + " : " + latLng.longitude);
+               mGoogleMap.clear();
+               mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+               mGoogleMap.addMarker(markerOptions);
+           });
+       }
     }
 
     @SuppressLint("MissingPermission")

@@ -69,25 +69,20 @@
         android:layout_marginStart="19dp"
         android:layout_marginTop="23dp"
         app:srcCompat="@drawable/ic_arrow_back" />
-    <HorizontalScrollView
+    <LinearLayout
         android:layout_margin="10dp"
         android:id="@+id/placesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/coordinate"
-        android:scrollbars="none">
+        android:layout_below="@+id/coordinate">
 
-        <com.google.android.material.chip.ChipGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:id="@+id/placesGroup"
-            tools:context=".FindPlacesNearby"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:singleLine="true"
-            app:singleSelection="true"/>
+     <com.google.android.material.button.MaterialButton
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/saveMarker"
+         android:text="save"/>
 
-    </HorizontalScrollView>
+    </LinearLayout>
 
 <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
 <!--        android:id="@+id/currentLocation"-->

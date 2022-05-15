@@ -44,6 +44,7 @@ public class AddPropertyActivity extends BaseMenuActivity {
     private EditText txtDescription;
     private ImageView imageView;
     private MaterialButton btnAddProperty;
+    private MaterialButton btnAddMarker;
     private EditText txtCapacity;
 
     private DataSnapshot dataSnapshot;
@@ -66,6 +67,7 @@ public class AddPropertyActivity extends BaseMenuActivity {
         imageView = findViewById(R.id.imageView);
         btnAddProperty = findViewById(R.id.btnAddProperty);
         txtCapacity = findViewById(R.id.txtCapacity);
+        btnAddMarker = findViewById(R.id.addMarker);
 
         referencePlaces = FirebaseDatabase.getInstance("https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Places");
         referenceProperties = FirebaseDatabase.getInstance("https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Properties");
@@ -75,6 +77,12 @@ public class AddPropertyActivity extends BaseMenuActivity {
 
         imageView.setOnClickListener(v -> {
             openFileChooser();
+        });
+
+        btnAddMarker.setOnClickListener(v -> {
+            Intent intent = new Intent(AddPropertyActivity.this, FindPlacesNearby.class);
+            intent.putExtra("ADD_MARKER", true);
+            startActivityForResult(intent, 1000);
         });
 
         btnAddProperty.setOnClickListener(v -> createProperty());
@@ -95,6 +103,10 @@ public class AddPropertyActivity extends BaseMenuActivity {
         if(requestCode == 2 && resultCode == RESULT_OK && data!=null){
             uri = data.getData();
             Picasso.get().load(uri).into(imageView);
+        }
+        if (requestCode == 1000 && resultCode == RESULT_OK && data != null) {
+            double lat = data.getDoubleExtra("LAT", 0 );
+            double lng = data.getDoubleExtra("LNG", 0 );
         }
     }
 
