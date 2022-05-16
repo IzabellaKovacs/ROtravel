@@ -12,6 +12,8 @@ public class Property implements Parcelable {
     String description;
     String image;
     int capacity;
+    double lat;
+    double lng;
 
     public Property() {}
 
@@ -24,6 +26,8 @@ public class Property implements Parcelable {
         description = in.readString();
         image = in.readString();
         capacity = in.readInt();
+        lat = in.readDouble();
+        lng = in.readDouble();
     }
 
     public static final Creator<Property> CREATOR = new Creator<Property>() {
@@ -102,6 +106,22 @@ public class Property implements Parcelable {
         this.capacity = capacity;
     }
 
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -117,6 +137,8 @@ public class Property implements Parcelable {
         dest.writeString(description);
         dest.writeString(image);
         dest.writeInt(capacity);
+        dest.writeDouble(lat);
+        dest.writeDouble(lng);
     }
 
 }

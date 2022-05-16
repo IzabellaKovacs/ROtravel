@@ -26,6 +26,7 @@ import com.example.rotravel.HelperClasses.ApplicationManager;
 import com.example.rotravel.Model.Property;
 import com.example.rotravel.Model.Reservation;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointBackward;
@@ -52,6 +53,7 @@ public class PropertyActivity extends AppCompatActivity {
     private TextView txtDateSelected;
     private TextView txtTotalPayment;
     private TextView txtMaxCapacity;
+    TextView btnCheckOnMap;
     ImageView imageProperty;
     ImageView btnBack;
     MaterialButton btnSelectDate;
@@ -89,6 +91,7 @@ public class PropertyActivity extends AppCompatActivity {
         txtDateSelected = findViewById(R.id.selectedDate);
         txtMaxCapacity = findViewById(R.id.txtMaxCapacity);
         txtEnterCapacity = findViewById(R.id.txtEnterCapacity);
+        btnCheckOnMap = findViewById(R.id.btnCheckOnMap);
 
         btnBack.setOnClickListener(v -> onBackPressed());
 
@@ -98,6 +101,7 @@ public class PropertyActivity extends AppCompatActivity {
                 .build();
 
         btnSelectDate.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER"));
+
         datePicker.addOnPositiveButtonClickListener(selection -> {
             first = selection.first;
             last = selection.second;
@@ -130,6 +134,14 @@ public class PropertyActivity extends AppCompatActivity {
         Picasso.get().load(property.getImage()).into(imageProperty);
         String capacity = String.valueOf(property.getCapacity());
         txtMaxCapacity.setText(capacity);
+
+        btnCheckOnMap.setOnClickListener(v -> {
+            Intent intent = new Intent(PropertyActivity.this, FindPlacesNearby.class);
+            intent.putExtra("LAT", property.getLat());
+            intent.putExtra("LNG", property.getLng());
+            intent.putExtra("Desc", property.getName());
+            startActivity(intent);
+        });
 
         mDatabase = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Reservations");
 

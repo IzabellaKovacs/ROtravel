@@ -51,6 +51,7 @@ public class AddPropertyActivity extends BaseMenuActivity {
     private ArrayList<Place> places = new ArrayList<>();
     private Place selectedPlace;
     private Uri uri;
+    double lat, lng;
 
     //firebase
     private DatabaseReference referencePlaces;
@@ -86,7 +87,6 @@ public class AddPropertyActivity extends BaseMenuActivity {
         });
 
         btnAddProperty.setOnClickListener(v -> createProperty());
-
     }
 
     public void openFileChooser(){
@@ -105,8 +105,8 @@ public class AddPropertyActivity extends BaseMenuActivity {
             Picasso.get().load(uri).into(imageView);
         }
         if (requestCode == 1000 && resultCode == RESULT_OK && data != null) {
-            double lat = data.getDoubleExtra("LAT", 0 );
-            double lng = data.getDoubleExtra("LNG", 0 );
+            lat = data.getDoubleExtra("LAT", 0 );
+            lng = data.getDoubleExtra("LNG", 0 );
         }
     }
 
@@ -155,12 +155,15 @@ public class AddPropertyActivity extends BaseMenuActivity {
             property.setPrice(num);
             property.setDescription(description);
             property.setCapacity(maxCap);
+            property.setLat(lat);
+            property.setLng(lng);
 
             uploadImageToFirebase(property);
 
             referenceProperties.child(property.getId()).setValue(property);
 
             Toast.makeText(this, "Property added", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, WelcomeActivity.class));
         }  
     }
 
