@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -56,43 +57,43 @@ public class RegisterActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(firstName)) {
             txtFirstName.setError("First name is required");
             txtFirstName.requestFocus();
-        }else if(TextUtils.isEmpty(lastName)) {
+        } else if(TextUtils.isEmpty(lastName)) {
             txtLastName.setError("Last name is required");
             txtLastName.requestFocus();
-        }else if(TextUtils.isEmpty(phone)){
+        } else if(TextUtils.isEmpty(phone)) {
             txtPhone.setError("Phone number is required");
             txtPhone.requestFocus();
-        }else if(TextUtils.isEmpty(email)){
-            txtEmail.setError("Email is required");
+        } else if(TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            txtEmail.setError("Valid email is required");
             txtEmail.requestFocus();
         }else if(TextUtils.isEmpty(password)) {
-            txtPassword.setError("Password is required");
-            txtPassword.requestFocus();
-        }else if(TextUtils.isEmpty(rePassword)) {
-            txtRePassword.setError("Password is required");
-            txtRePassword.requestFocus();
-        }else if(!password.equals(rePassword)){
-            txtRePassword.setError("Passwords does not match");
-            txtRePassword.requestFocus();
-        }else{
-            User user = new User();
-            user.setFirstName(txtFirstName.getText().toString());
-            user.setLastName(txtLastName.getText().toString());
-            user.setPhone(txtPhone.getText().toString());
-            user.setEmail(txtEmail.getText().toString());
+                txtPassword.setError("Password is required");
+                txtPassword.requestFocus();
+            }else if(TextUtils.isEmpty(rePassword)) {
+                txtRePassword.setError("Password is required");
+                txtRePassword.requestFocus();
+            }else if(!password.equals(rePassword)){
+                txtRePassword.setError("Passwords does not match");
+                txtRePassword.requestFocus();
+            }else{
+                User user = new User();
+                user.setFirstName(txtFirstName.getText().toString());
+                user.setLastName(txtLastName.getText().toString());
+                user.setPhone(txtPhone.getText().toString());
+                user.setEmail(txtEmail.getText().toString());
 
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    Toast.makeText(RegisterActivity.this, "User Created",Toast.LENGTH_SHORT).show();
-                    user.setId(task.getResult().getUser().getUid());
-                    mDatabase.child(user.getId()).setValue(user);
-                    startActivity(new Intent(RegisterActivity.this, WelcomeActivity.class));
-                } else {
-                    Toast.makeText(RegisterActivity.this, " " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    System.out.println(task.getException().getMessage());
-                }
-            });
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(RegisterActivity.this, "Account created",Toast.LENGTH_SHORT).show();
+                        user.setId(task.getResult().getUser().getUid());
+                        mDatabase.child(user.getId()).setValue(user);
+                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                    } else {
+                        Toast.makeText(RegisterActivity.this, " " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        System.out.println(task.getException().getMessage());
+                    }
+                });
+            }
         }
-    }
-
 }
+

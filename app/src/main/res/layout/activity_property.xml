@@ -14,8 +14,8 @@
         <RelativeLayout
             android:id="@+id/blueScreen"
             android:layout_width="260dp"
-            android:background="@drawable/shape_v2"
-            android:layout_height="320dp">
+            android:layout_height="330dp"
+            android:background="@drawable/shape_v2">
 
             <ImageView
                 android:id="@+id/btnBack"
@@ -70,11 +70,13 @@
         </androidx.cardview.widget.CardView>
 
         <RelativeLayout
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/blueScreen"
-            android:padding="15dp">
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp">
 
             <TextView
                 android:id="@+id/txtPropertyName"
@@ -91,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtPropertyName"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="15dp">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -115,44 +117,52 @@
                     android:textColor="@color/textColor"
                     android:textSize="15sp" />
 
-                <LinearLayout
-                    android:layout_marginStart="100dp"
-                    android:id="@+id/capacity"
-                    android:layout_below="@+id/payment"
+                <TextView
+                    android:id="@+id/text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_people_icon_v2" />
-
-                    <TextView
-                        android:id="@+id/txtMaxCapacity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="7dp"
-                        android:text="capacity"
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="7dp"
-                        android:text="max."
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                    android:layout_marginStart="25dp"
+                    android:text="(Payment is made at the property)"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/capacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/payment"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_people_icon"
+                    app:tint="@color/blue" />
+
+                <TextView
+                    android:id="@+id/txtMaxCapacity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:text="capacity"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:text="max."
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/capacity"
                 android:layout_marginTop="10dp">
 
                 <ImageView
@@ -170,146 +180,163 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSelectDate"
-                android:layout_width="160dp"
-                android:layout_height="70dp"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:id="@+id/notForOwner"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/description"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/yellow"
-                android:text="Select date"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:cornerRadius="7dp"
-                app:icon="@drawable/ic_calendar_icon"
-                app:iconTint="@color/white" />
-
-            <TextView
-                android:id="@+id/selectedDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btnSelectDate"
-                android:textSize="15sp"
                 android:layout_centerHorizontal="true"
-                android:text="" />
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#FBF8DD"
+                android:elevation="5dp"
+                app:cardCornerRadius="25dp">
 
-            <RelativeLayout
-                android:layout_centerInParent="true"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/enterCapacity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/selectedDate"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                <RelativeLayout
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:id="@+id/enter"
-                    android:textColor="@color/textColor"
-                    android:textStyle="bold"
-                    android:text="Enter Capacity: "/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/txtEnterCapacity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/enter"
-                    android:background="@android:color/transparent"
-                    android:hint=""
-                    android:inputType="number"
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/txtPls"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="Make a reservation!"
+                        android:textColor="@color/textColor"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
-                <View
-                    android:layout_width="150dp"
-                    android:layout_height="2dp"
-                    android:layout_below="@+id/enter"
-                    android:background="@color/yellow" />
-            </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/enterCapacity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtPls"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/enterCapacity"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/ppIcon"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="5dp"
+                            android:src="@drawable/ic_people_icon_v2"
+                            app:tint="@color/red" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="Total payment:"
-                    android:textColor="@color/textColor"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/txtEnterCapacity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/ppIcon"
+                            android:background="@android:color/transparent"
+                            android:hint="enter capacity"
+                            android:inputType="number"
+                            android:textColor="@color/textColor"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/totalPayment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginBottom="10dp"
-                    android:text=""
-                    android:textColor="@color/textColor" />
 
-            </LinearLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSelectDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/enterCapacity"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="@color/white"
+                        android:text="Select date"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="25dp"
+                        app:icon="@drawable/ic_calendar_icon"
+                        app:iconTint="@color/red"
+                        app:strokeColor="@color/red"
+                        app:strokeWidth="1dp" />
 
-            <TextView
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/details"
-                android:layout_centerHorizontal="true"
-                android:text="(Payment is made at the property)"
-                android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/selectedDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/btnSelectDate"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="30dp"
+                        android:text=""
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                    <LinearLayout
+                        android:id="@+id/details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/selectedDate"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCallOwner"
-                    android:layout_width="160dp"
-                    android:layout_height="70dp"
-                    android:layout_marginEnd="5dp"
-                    android:backgroundTint="@color/white"
-                    android:text="Call owner"
-                    android:textAllCaps="false"
-                    android:textColor="@color/blue"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="7dp"
-                    app:icon="@drawable/ic_person_icon"
-                    app:iconTint="@color/blue"
-                    app:strokeColor="@color/blue"
-                    app:strokeWidth="3dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total payment:"
+                            android:textColor="@color/red"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnReserve"
-                    android:layout_width="160dp"
-                    android:layout_height="70dp"
-                    android:layout_marginStart="5dp"
-                    android:backgroundTint="@color/blue"
-                    android:text="Reserve"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="7dp"
-                    app:icon="@drawable/ic_hotel"
-                    app:iconTint="@color/white" />
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/totalPayment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text=""
+                            android:textColor="@color/textColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/details"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCallOwner"
+                            android:layout_width="160dp"
+                            android:layout_height="70dp"
+                            android:layout_marginEnd="5dp"
+                            android:backgroundTint="@color/white"
+                            android:text="Call owner"
+                            android:textAllCaps="false"
+                            android:textColor="@color/blue"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            app:cornerRadius="7dp"
+                            app:icon="@drawable/ic_person_icon"
+                            app:iconTint="@color/blue"
+                            app:strokeColor="@color/blue"
+                            app:strokeWidth="3dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnReserve"
+                            android:layout_width="160dp"
+                            android:layout_height="70dp"
+                            android:layout_marginStart="5dp"
+                            android:backgroundTint="@color/blue"
+                            android:text="Reserve"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            app:cornerRadius="7dp"
+                            app:icon="@drawable/ic_hotel"
+                            app:iconTint="@color/white" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </RelativeLayout>
 

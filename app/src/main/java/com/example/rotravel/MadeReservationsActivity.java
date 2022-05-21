@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -38,7 +39,8 @@ public class MadeReservationsActivity extends AppCompatActivity {
     MadeReservationsAdapter adapter;
 
     Property property;
-    ArrayList<Reservation> reservations = new ArrayList<>();
+    private final ArrayList<Reservation> reservations = new ArrayList<>();
+    private final ArrayList<User> users = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +66,35 @@ public class MadeReservationsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reservations.clear();
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Reservation reservation = dataSnapshot.getValue(Reservation.class);
 
                     assert reservation != null;
-                    if(property.getId().equals(reservation.getIdProperty()))
+                    if(property.getId().equals(reservation.getIdProperty())){
                         reservations.add(reservation);
+
+                        FirebaseDatabase.getInstance("https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
+                                .getReference("User")
+                                .addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for(DataSnapshot dataSnapshot1 : snapshot.getChildren()){
+                                            User user = dataSnapshot1.getValue(User.class);
+
+                                            assert user != null;
+                                            if(user.getId().equals(reservation.getIdUser())) {
+                                                users.add(user);
+                                            }
+                                            adapter.notifyDataSetChanged();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                    }
 
                 }
 
@@ -97,7 +122,7 @@ public class MadeReservationsActivity extends AppCompatActivity {
         allMadeReservations.setHasFixedSize(true);
         allMadeReservations.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        adapter = new MadeReservationsAdapter(this, reservations);
+        adapter = new MadeReservationsAdapter(this, reservations, users);
         allMadeReservations.setAdapter(adapter);
     }
 

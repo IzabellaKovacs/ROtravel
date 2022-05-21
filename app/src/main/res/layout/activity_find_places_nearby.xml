@@ -7,7 +7,7 @@
     tools:context=".FindPlacesNearby">
 
     <fragment
-        android:layout_below="@+id/placesList"
+        android:layout_below="@+id/layoutForMarker"
         android:layout_marginTop="10dp"
         android:id="@+id/homeMap"
         android:layout_width="match_parent"
@@ -36,7 +36,6 @@
             app:layout_anchor="@id/view"
             app:layout_anchorGravity="bottom|center"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtSearchPlaceName"
                 android:layout_width="match_parent"
@@ -47,7 +46,6 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:textColorHint="@color/grey"/>
-
         </com.google.android.material.textfield.TextInputLayout>
         
         <View
@@ -57,7 +55,6 @@
             android:id="@+id/view"
             android:background="@drawable/map_background"
             android:elevation="5dp"/>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <ImageView
@@ -69,33 +66,28 @@
         android:layout_marginStart="19dp"
         android:layout_marginTop="23dp"
         app:srcCompat="@drawable/ic_arrow_back" />
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_margin="10dp"
-        android:id="@+id/placesList"
+        android:id="@+id/layoutForMarker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/coordinate">
-
-     <com.google.android.material.button.MaterialButton
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:id="@+id/saveMarker"
-         android:text="save"/>
-
-    </LinearLayout>
-
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/currentLocation"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/placesList"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginStart="15dp"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:layout_marginEnd="15dp"-->
-<!--        android:src="@drawable/ic_my_location_icon"-->
-<!--        app:backgroundTint="@color/white"-->
-<!--        app:fabCustomSize="40dp"-->
-<!--        app:tint="@color/red" />-->
+        <com.google.android.material.button.MaterialButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:id="@+id/saveMarker"
+             android:textAllCaps="false"
+            android:layout_centerHorizontal="true"
+             android:backgroundTint="@color/white"
+             app:icon="@drawable/ic_place_icon"
+             app:iconTint="@color/blue"
+             android:textSize="17sp"
+             app:strokeWidth="1dp"
+             app:cornerRadius="25dp"
+             app:strokeColor="@color/blue"
+             android:textColor="@color/blue"
+             android:text="Save pin" />
+    </RelativeLayout>
 
 </RelativeLayout>

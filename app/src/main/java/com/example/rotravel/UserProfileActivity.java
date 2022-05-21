@@ -36,7 +36,7 @@ public class UserProfileActivity extends BaseMenuActivity {
 
     private DatabaseReference mDatabase;
 
-    private final ArrayList<Property> reservedProperties = new ArrayList<>();
+    private final ArrayList<Property> properties = new ArrayList<>();
     private final ArrayList<Reservation> reservations = new ArrayList<>();
 
     @Override
@@ -73,7 +73,7 @@ public class UserProfileActivity extends BaseMenuActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reservations.clear();
-                reservedProperties.clear();
+                properties.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Reservation reservation = dataSnapshot.getValue(Reservation.class);
 
@@ -90,7 +90,7 @@ public class UserProfileActivity extends BaseMenuActivity {
                                             Property property = dataSnapshot.getValue(Property.class);
 
                                             if(reservation.getIdProperty().equals(property.getId()))
-                                                reservedProperties.add(property);
+                                                properties.add(property);
 
                                         }
                                         adapter.notifyDataSetChanged();
@@ -118,7 +118,7 @@ public class UserProfileActivity extends BaseMenuActivity {
         allReservations.setHasFixedSize(true);
         allReservations.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        adapter = new AllReservedPropertiesAdapter(this, reservedProperties, reservations );
+        adapter = new AllReservedPropertiesAdapter(this, properties, reservations );
         allReservations.setAdapter(adapter);
 
     }

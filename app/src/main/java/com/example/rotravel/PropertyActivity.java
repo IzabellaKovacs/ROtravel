@@ -17,8 +17,10 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.util.Pair;
 
 import android.os.Parcelable;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ import com.example.rotravel.Model.Reservation;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.DateValidatorPointForward;
@@ -53,6 +56,7 @@ public class PropertyActivity extends AppCompatActivity {
     private TextView txtDateSelected;
     private TextView txtTotalPayment;
     private TextView txtMaxCapacity;
+    private MaterialCardView notForOwner;
     TextView btnCheckOnMap;
     ImageView imageProperty;
     ImageView btnBack;
@@ -63,7 +67,7 @@ public class PropertyActivity extends AppCompatActivity {
     Property property;
     private DatabaseReference mDatabase;
     int numDay;
-    int maxCap;
+    int maxCap, propertyCapacity;
     int payment;
     long first, last;
     String totalPayment;
@@ -92,8 +96,13 @@ public class PropertyActivity extends AppCompatActivity {
         txtMaxCapacity = findViewById(R.id.txtMaxCapacity);
         txtEnterCapacity = findViewById(R.id.txtEnterCapacity);
         btnCheckOnMap = findViewById(R.id.btnCheckOnMap);
+        notForOwner = findViewById(R.id.notForOwner);
 
         btnBack.setOnClickListener(v -> onBackPressed());
+
+        if(ApplicationManager.getInstance().getUser().getId().equals(property.getIdUser())){
+            notForOwner.setVisibility(View.GONE);
+        }
 
         datePicker = MaterialDatePicker.Builder
                 .dateRangePicker()
@@ -158,6 +167,7 @@ public class PropertyActivity extends AppCompatActivity {
                     Reservation reservation = dataSnapshot.getValue(Reservation.class);
 
                     assert reservation != null;
+
                     if (reservation.getIdProperty().equals(property.getId()) &&
                             ApplicationManager.getInstance().getUser().getId().equals(reservation.getIdUser())) {
 
@@ -171,8 +181,8 @@ public class PropertyActivity extends AppCompatActivity {
                         btnReserve.setOnClickListener(v -> {
                             if(numDay == 0){
                                 Toast.makeText(PropertyActivity.this, "You must select a date", Toast.LENGTH_LONG).show();
-                            }else if(maxCap == 0){
-                                Toast.makeText(PropertyActivity.this, "You must enter capacity", Toast.LENGTH_LONG).show();
+                            }else if(maxCap > property.getCapacity()){
+                                Toast.makeText(PropertyActivity.this, "Maximum capacity is " + property.getCapacity(), Toast.LENGTH_LONG).show();
                             } else {
 
                                 newReservation.setId(UUID.randomUUID().toString());

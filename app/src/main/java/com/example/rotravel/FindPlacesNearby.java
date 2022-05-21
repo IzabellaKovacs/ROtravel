@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,6 +45,7 @@ public class FindPlacesNearby extends AppCompatActivity implements
 
     private ImageView btnBack;
     private MaterialButton save;
+    private TextInputEditText txtSearchPlaceName;
 
     private boolean canAddMarker = false;
     private double lat;
@@ -63,6 +65,7 @@ public class FindPlacesNearby extends AppCompatActivity implements
 
         btnBack = findViewById(R.id.btnBack);
         save = findViewById(R.id.saveMarker);
+        txtSearchPlaceName = findViewById(R.id.txtSearchPlaceName);
 
         if (getIntent() != null && getIntent().getExtras() != null) {
             canAddMarker = getIntent().getExtras().getBoolean("ADD_MARKER", false);
@@ -110,6 +113,7 @@ public class FindPlacesNearby extends AppCompatActivity implements
        }
 
        if (canAddMarker) {
+           txtSearchPlaceName.setVisibility(View.GONE);
            mGoogleMap.setOnMapClickListener(latLng -> {
                lat = latLng.latitude;
                lng = latLng.longitude;

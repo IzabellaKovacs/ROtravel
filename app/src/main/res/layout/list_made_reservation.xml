@@ -157,18 +157,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAccept"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:text="Accept"
-                android:textColor="@color/textColor"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                app:cornerRadius="7dp"
-                app:strokeColor="@color/blue"
-                app:strokeWidth="3dp" />
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDecline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -176,11 +164,12 @@
                 android:text="Decline"
                 android:layout_marginStart="7dp"
                 android:textColor="@color/textColor"
-                android:textSize="17sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
-                app:cornerRadius="7dp"
+                app:cornerRadius="25dp"
+                android:textAllCaps="false"
                 app:strokeColor="@color/red"
-                app:strokeWidth="3dp" />
+                app:strokeWidth="1dp" />
         </LinearLayout>
 
     </RelativeLayout>

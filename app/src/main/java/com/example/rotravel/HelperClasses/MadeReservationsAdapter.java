@@ -26,10 +26,12 @@ public class MadeReservationsAdapter extends RecyclerView.Adapter<MadeReservatio
 
     Context context;
     ArrayList<Reservation> reservations;
+    ArrayList<User> users;
 
-    public MadeReservationsAdapter(Context context, ArrayList<Reservation> reservations) {
+    public MadeReservationsAdapter(Context context, ArrayList<Reservation> reservations, ArrayList<User> users) {
         this.context = context;
         this.reservations = reservations;
+        this.users = users;
     }
 
     @NonNull
@@ -46,10 +48,14 @@ public class MadeReservationsAdapter extends RecyclerView.Adapter<MadeReservatio
 
         String c = reservations.get(position).getTotalCapacity() + "";
         holder.txtCapacity2.setText(c);
-//        holder.txtPhoneUser.setText(user.getPhone());
-//        String fullName = user.getFirstName() + " " + user.getLastName();
-//        holder.txtNameUser.setText(fullName);
 
+        for(User user : users){
+            if(reservations.get(position).getIdUser().equals(user.getId())){
+                holder.txtPhoneUser.setText(user.getPhone());
+                String fullName = user.getFirstName() + " " + user.getLastName();
+                holder.txtNameUser.setText(fullName);
+            }
+        }
 
     }
 

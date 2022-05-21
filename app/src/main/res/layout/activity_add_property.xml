@@ -38,7 +38,6 @@
                 <LinearLayout
                     android:id="@+id/layoutAddProp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -56,7 +55,7 @@
                     android:id="@+id/layoutProp"
                     android:layout_width="wrap_content"
                     android:layout_below="@+id/layoutAddProp"
-                    android:padding="20dp"
+                    android:padding="10dp"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
 
@@ -109,6 +108,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="3dp"
                         android:background="@color/red" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:text="NOTE: "/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:textSize="12sp"
+                            android:text="Be aware that the payment is made by the user at the property!"/>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -163,20 +179,27 @@
                         android:background="@color/red" />
 
                         <com.google.android.material.button.MaterialButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="70dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:id="@+id/addMarker"
-                            android:text="Add marker on the map"
+                            android:text="Add pin on the map"
                             android:layout_marginTop="10dp"
                             android:backgroundTint="@color/white"
                             android:textColor="@color/blue"
+                            android:textSize="15sp"
+                            android:textAllCaps="false"
                             app:icon="@drawable/ic_my_location_icon"
                             app:iconTint="@color/blue"
-                            app:strokeWidth="3dp"
-                            app:cornerRadius="7dp"
+                            app:cornerRadius="25dp"
+                            app:strokeWidth="1dp"
                             app:strokeColor="@color/blue"
                             android:textStyle="bold"/>
 
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Select the city around which your property is located :" />
                     <Spinner
                         android:id="@+id/spinnerPlaces"
                         android:layout_width="match_parent"
@@ -186,9 +209,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Add photo of the property"
-                        android:layout_marginTop="20dp"
-                        android:textColor="@color/textColor"/>
+                        android:text="Add photo of the property: "
+                        android:layout_marginTop="10dp" />
 
                 </LinearLayout>
 
@@ -205,17 +227,16 @@
                     android:id="@+id/btnAddProperty"
                     android:layout_width="wrap_content"
                     android:layout_height="70dp"
-                    android:backgroundTint="@color/red"
                     android:layout_below="@+id/imageView"
                     android:layout_centerHorizontal="true"
+                    android:backgroundTint="@color/red"
                     android:text="Add property"
-                    android:textAllCaps="false"
                     android:textColor="@color/white"
-                    app:strokeWidth="3dp"
-                    app:strokeColor="@color/red"
+                    android:textSize="15sp"
                     android:textStyle="bold"
-                    android:textSize="17sp"
-                    app:cornerRadius="7dp" />
+                    app:cornerRadius="7dp"
+                    app:strokeColor="@color/red"
+                    app:strokeWidth="3dp" />
 
             </RelativeLayout>
         </ScrollView>
