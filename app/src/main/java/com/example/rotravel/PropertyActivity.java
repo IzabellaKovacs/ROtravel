@@ -2,25 +2,16 @@ package com.example.rotravel;
 
 import androidx.annotation.NonNull;
 import android.annotation.SuppressLint;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.util.Pair;
 
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,11 +19,10 @@ import com.example.rotravel.HelperClasses.ApplicationManager;
 import com.example.rotravel.Model.Property;
 import com.example.rotravel.Model.Reservation;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.example.rotravel.Model.User;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.datepicker.CalendarConstraints;
-import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
@@ -43,13 +33,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.util.Calendar;
-import java.util.TimeZone;
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class PropertyActivity extends AppCompatActivity {
 
+    // Init widgets
     private TextView txtPropertyName;
     private TextView txtPropertyDescription;
     private TextView txtPropertyPrice;
@@ -57,23 +47,27 @@ public class PropertyActivity extends AppCompatActivity {
     private TextView txtTotalPayment;
     private TextView txtMaxCapacity;
     private MaterialCardView notForOwner;
-    TextView btnCheckOnMap;
-    ImageView imageProperty;
-    ImageView btnBack;
-    MaterialButton btnSelectDate;
-    MaterialButton btnReserve;
-    EditText txtEnterCapacity;
+    private TextView btnCheckOnMap;
+    private ImageView imageProperty;
+    private ImageView btnBack;
+    private MaterialButton btnSelectDate;
+    private MaterialButton btnReserve;
+    private MaterialButton btnContactOwner;
+    private EditText txtEnterCapacity;
 
+    public static String PROPERTY = "property";
     Property property;
+
     private DatabaseReference mDatabase;
+
     int numDay;
-    int maxCap, propertyCapacity;
+    int maxCap;
     int payment;
     long first, last;
     String totalPayment;
     String capacityEntered;
     MaterialDatePicker<Pair<Long, Long>> datePicker;
-    public static String PROPERTY = "property";
+    ArrayList<User> owner2 = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -97,6 +91,7 @@ public class PropertyActivity extends AppCompatActivity {
         txtEnterCapacity = findViewById(R.id.txtEnterCapacity);
         btnCheckOnMap = findViewById(R.id.btnCheckOnMap);
         notForOwner = findViewById(R.id.notForOwner);
+        btnContactOwner = findViewById(R.id.btnContactOwner);
 
         btnBack.setOnClickListener(v -> onBackPressed());
 
@@ -152,10 +147,51 @@ public class PropertyActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        getOwner();
+
+        btnContactOwner.setOnClickListener(v -> {
+            contactOwner();
+        });
+
         mDatabase = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Reservations");
+
+
 
         reserve();
     }
+
+    private void contactOwner() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", owner2.get(0).getPhone(), null ));
+        intent.putExtra("sms_body", "Hello dear ");
+        startActivity(intent);
+
+    }
+
+    private void getOwner(){
+        FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("User")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            ArrayList<User> owner = new ArrayList<>();
+                            User user = dataSnapshot.getValue(User.class);
+
+                            assert user != null;
+                            if(user.getId().equals(property.getIdUser())){
+                                owner.add(user);
+                                owner2.add(owner.get(0));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
 
     private void reserve() {
         Reservation newReservation = new Reservation();

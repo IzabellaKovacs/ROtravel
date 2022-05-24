@@ -66,6 +66,7 @@ public class MadeReservationsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reservations.clear();
+                users.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Reservation reservation = dataSnapshot.getValue(Reservation.class);
 
