@@ -15,6 +15,7 @@ import com.example.rotravel.HelperClasses.AllPlacesToStayRecViewAdapter;
 import com.example.rotravel.HelperClasses.ApplicationManager;
 import com.example.rotravel.HelperClasses.MadeReservationsAdapter;
 import com.example.rotravel.HelperClasses.UserPropertiesRecViewAdapter;
+import com.example.rotravel.Model.AcceptedReservation;
 import com.example.rotravel.Model.Property;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -76,12 +77,23 @@ public class UserPropertiesActivity extends AppCompatActivity {
         allPropertiesAndReservations.setHasFixedSize(true);
         allPropertiesAndReservations.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        adapter = new UserPropertiesRecViewAdapter(this, properties, property -> {
-           Intent intent = new Intent(UserPropertiesActivity.this, MadeReservationsActivity.class);
-           intent.putExtra(MadeReservationsActivity.PROPERTY_RESERVATIONS, property);
-           startActivity(intent);
+        adapter = new UserPropertiesRecViewAdapter(this, properties, new UserPropertiesRecViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Property property) {
+                Intent intent = new Intent(UserPropertiesActivity.this, AcceptedReservationsActivity.class);
+                intent.putExtra(AcceptedReservationsActivity.PROPERTY_ACCEPTED_RESERVATIONS, property);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemClickRequests(Property property) {
+                Intent intent = new Intent(UserPropertiesActivity.this, MadeReservationsActivity.class);
+                intent.putExtra(MadeReservationsActivity.PROPERTY_RESERVATIONS, property);
+                startActivity(intent);
+            }
         });
 
        allPropertiesAndReservations.setAdapter(adapter);
+
     }
 }

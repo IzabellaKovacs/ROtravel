@@ -2,6 +2,7 @@ package com.example.rotravel;
 
 import androidx.annotation.NonNull;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -155,14 +156,12 @@ public class PropertyActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Reservations");
 
-
-
         reserve();
     }
 
     private void contactOwner() {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", owner2.get(0).getPhone(), null ));
-        intent.putExtra("sms_body", "Hello dear ");
+        intent.putExtra("sms_body", "[Reservation]: ");
         startActivity(intent);
 
     }
@@ -204,16 +203,6 @@ public class PropertyActivity extends AppCompatActivity {
 
                     assert reservation != null;
 
-                    if (reservation.getIdProperty().equals(property.getId()) &&
-                            ApplicationManager.getInstance().getUser().getId().equals(reservation.getIdUser())) {
-
-                        btnSelectDate.setEnabled(false);
-                        btnSelectDate.setBackgroundColor(getResources().getColor(R.color.lightBlue));
-                        txtTotalPayment.setText(reservation.getTotal());
-                        btnReserve.setBackgroundColor(getResources().getColor(R.color.lightBlue));
-                        btnReserve.setEnabled(false);
-                        btnReserve.setText("Reserved");
-                    } else {
                         btnReserve.setOnClickListener(v -> {
                             if(numDay == 0){
                                 Toast.makeText(PropertyActivity.this, "You must select a date", Toast.LENGTH_LONG).show();
@@ -233,10 +222,14 @@ public class PropertyActivity extends AppCompatActivity {
                                 //waitResponseForReservation(newReservation);
 
                                 mDatabase.child(newReservation.getId()).setValue(newReservation);
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(PropertyActivity.this);
+                                builder.setTitle("THE REQUEST HAS BEEN SENT!");
+                                builder.setMessage("\n\nCheck your profile to see if the owner has approved/declined your request. ");
+                                builder.setNegativeButton("Ok", (dialogInterface, i) -> dialogInterface.dismiss());
+                                builder.show();
                             }
                         });
-                    }
-
                 }
             }
 

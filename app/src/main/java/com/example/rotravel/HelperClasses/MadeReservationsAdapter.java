@@ -8,13 +8,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.rotravel.Model.AcceptedReservation;
 import com.example.rotravel.Model.Reservation;
 import com.example.rotravel.Model.User;
 import com.example.rotravel.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class MadeReservationsAdapter extends RecyclerView.Adapter<MadeReservationsAdapter.ViewHolder> {
 
@@ -51,17 +58,37 @@ public class MadeReservationsAdapter extends RecyclerView.Adapter<MadeReservatio
             }
         }
 
+        DatabaseReference databaseReservations = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("Reservations");
+        DatabaseReference databaseAcceptedReservations = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("AcceptedReservations");
+
+        Reservation reservation = reservations.get(position);
+
         holder.decline().setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setMessage("Are you sure you want to decline this reservation?");
             builder.setPositiveButton("Yes", (dialogInterface, i) ->
-                    FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
-                            .getReference("Reservations")
-                            .child(reservations.get(position).getId())
-                            .removeValue());
+                    databaseReservations.child(reservations.get(position).getId()).removeValue());
             builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
             builder.show();
 
+        });
+
+        holder.accept().setOnClickListener(v -> {
+            final AcceptedReservation newReservation = new AcceptedReservation();
+
+            newReservation.setId(UUID.randomUUID().toString());
+            newReservation.setIdProperty(reservation.getIdProperty());
+            newReservation.setIdUser(reservation.getIdUser());
+            newReservation.setDate(reservation.getDate());
+            newReservation.setFirst(reservation.getFirst());
+            newReservation.setLast(reservation.getLast());
+            newReservation.setTotal(reservation.getTotal());
+            newReservation.setTotalCapacity(reservation.getTotalCapacity());
+
+            databaseAcceptedReservations.child(newReservation.getId()).setValue(newReservation);
+            databaseReservations.child(reservation.getId()).removeValue();
         });
     }
 
@@ -78,6 +105,7 @@ public class MadeReservationsAdapter extends RecyclerView.Adapter<MadeReservatio
         TextView txtNameUser;
         TextView txtPhoneUser;
         MaterialButton btnDecline;
+        MaterialButton btnAccept;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,8 +116,11 @@ public class MadeReservationsAdapter extends RecyclerView.Adapter<MadeReservatio
             txtNameUser = itemView.findViewById(R.id.txtFullNameUser);
             txtPhoneUser = itemView.findViewById(R.id.txtPhoneUser);
             btnDecline = itemView.findViewById(R.id.btnDecline);
+            btnAccept = itemView.findViewById(R.id.btnAccept);
         }
 
         public MaterialButton decline(){ return  btnDecline; }
+
+        public MaterialButton accept(){ return btnAccept; }
     }
 }

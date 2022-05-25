@@ -47,35 +47,55 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCheckDetails"
+                android:id="@+id/btnEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:backgroundTint="@color/white"
-                android:text="Details"
+                android:text="Edit details"
                 android:textAllCaps="false"
                 android:textColor="@color/textColor"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:cornerRadius="7dp"
-                app:icon="@drawable/ic_info_icon"
-                app:iconTint="@color/blue"
-                app:strokeColor="@color/lightBlue"
+                app:icon="@drawable/ic_edit_icon"
+                app:iconTint="@color/yellow"
+                app:strokeColor="@color/yellow"
                 app:strokeWidth="2dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCheckRequests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:backgroundTint="@color/white"
+                android:text="Requests"
+                android:textColor="@color/red"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginTop="25dp"
+                app:cornerRadius="7dp"
+                app:icon="@drawable/ic_notifications_ic"
+                app:iconTint="@color/red"
+                app:strokeColor="@color/red"
+                app:strokeWidth="2dp"
+                />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCheckReservations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:backgroundTint="@color/lightBlue"
+                android:backgroundTint="@color/white"
                 android:text="Reservations"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:cornerRadius="7dp"
                 app:icon="@drawable/ic_hotel"
                 app:iconTint="@color/blue"
+                app:strokeColor="@color/blue"
+                app:strokeWidth="2dp"
               />
 
         </LinearLayout>

@@ -22,6 +22,7 @@ public class UserPropertiesRecViewAdapter extends RecyclerView.Adapter<UserPrope
 
     public interface OnItemClickListener {
         void onItemClick(Property property);
+        void onItemClickRequests(Property property);
     }
 
     Context context;
@@ -46,6 +47,7 @@ public class UserPropertiesRecViewAdapter extends RecyclerView.Adapter<UserPrope
         Property property = properties.get(position);
         holder.txtPropertyName.setText(property.getName());
 //        holder.getDetails().setOnClickListener(v -> listener.onItemClick(property));
+        holder.getRequests().setOnClickListener(v -> listener.onItemClickRequests(property));
         holder.getReservations().setOnClickListener(v -> listener.onItemClick(property));
         Picasso.get().load(property.getImage()).into(holder.imgProperty);
 
@@ -59,7 +61,8 @@ public class UserPropertiesRecViewAdapter extends RecyclerView.Adapter<UserPrope
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgProperty;
         TextView txtPropertyName;
-        MaterialButton btnCheckDetails;
+        MaterialButton btnEdit;
+        MaterialButton btnCheckRequests;
         MaterialButton btnCheckReservations;
 
         public ViewHolder(@NonNull View itemView) {
@@ -67,17 +70,20 @@ public class UserPropertiesRecViewAdapter extends RecyclerView.Adapter<UserPrope
 
             imgProperty = itemView.findViewById(R.id.imgProperty);
             txtPropertyName = itemView.findViewById(R.id.txtPropertyName);
-            btnCheckDetails = itemView.findViewById(R.id.btnCheckDetails);
+            btnEdit = itemView.findViewById(R.id.btnEdit);
             btnCheckReservations = itemView.findViewById(R.id.btnCheckReservations);
+            btnCheckRequests = itemView.findViewById(R.id.btnCheckRequests);
         }
 
-        public MaterialButton getDetails(){
-            return btnCheckDetails;
+        public MaterialButton getEdit(){
+            return btnEdit;
         }
 
         public MaterialButton getReservations(){
             return btnCheckReservations;
         }
+
+        public MaterialButton getRequests() { return btnCheckRequests; }
     }
 
 

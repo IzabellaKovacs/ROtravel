@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/img"
         android:layout_width="match_parent"
-        android:background="@color/yellow"
+        android:background="@color/red"
         android:layout_height="match_parent">
 
         <ImageView
@@ -21,6 +21,7 @@
             android:layout_marginStart="19dp"
             android:layout_marginTop="23dp"
             app:srcCompat="@drawable/ic_arrow_back" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_below="@+id/btnBack"

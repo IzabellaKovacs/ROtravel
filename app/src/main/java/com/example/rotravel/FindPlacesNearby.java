@@ -35,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class FindPlacesNearby extends AppCompatActivity implements
@@ -48,6 +49,7 @@ public class FindPlacesNearby extends AppCompatActivity implements
     private TextInputEditText txtSearchPlaceName;
 
     private boolean canAddMarker = false;
+    private boolean canSearch = false;
     private double lat;
     private double lng;
     private String name;
@@ -81,6 +83,7 @@ public class FindPlacesNearby extends AppCompatActivity implements
         }
 
         btnBack.setOnClickListener(v -> onBackPressed());
+
         save.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.putExtra("LAT", lat);
@@ -89,10 +92,48 @@ public class FindPlacesNearby extends AppCompatActivity implements
             finish();
         });
 
+//        txtSearchPlaceName.setOnClickListener(v -> {
+//            canSearch = true;
+//        });
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.homeMap);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+
+    }
+
+    private void searchProperty(String name) {
+        propertiesHashMap.clear();
+        FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Properties")
+                .addValueEventListener(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        int i = 0;
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            Property property = dataSnapshot.getValue(Property.class);
+
+                            if(property == null) continue;
+
+                            if(!name.isEmpty() && (property.getName().toLowerCase().startsWith(name.toLowerCase())) || property.getName().equals((name.toLowerCase())) ){
+                                MarkerOptions markerOptions = new MarkerOptions();
+                                markerOptions.position(new LatLng(property.getLat(), property.getLng()));
+                                markerOptions.title(property.getName());
+                                Marker marker = mGoogleMap.addMarker(markerOptions);
+                                marker.setTag(i);
+                                propertiesHashMap.put(i, property);
+                                i++;
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+
 
     }
 
@@ -108,7 +149,7 @@ public class FindPlacesNearby extends AppCompatActivity implements
            markerOptions.title(name);
            mGoogleMap.clear();
            mGoogleMap.addMarker(markerOptions);
-       } else if (!canAddMarker){
+       } else if (!canAddMarker) {
            getDeviceLocation();
        }
 
@@ -123,8 +164,14 @@ public class FindPlacesNearby extends AppCompatActivity implements
                mGoogleMap.clear();
                mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
                mGoogleMap.addMarker(markerOptions);
+
            });
        }
+
+//       if(canSearch){
+//           name = Objects.requireNonNull(txtSearchPlaceName.getText()).toString();
+//           searchProperty(name);
+//       }
     }
 
     @SuppressLint("MissingPermission")

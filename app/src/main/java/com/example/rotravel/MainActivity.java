@@ -58,14 +58,14 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(v -> loginUser());
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if (currentUser != null) {
-//            getUser(currentUser.getUid());
-//        }
-//    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            getUser(currentUser.getUid());
+        }
+    }
 
     private void loginUser(){
         String email = txtEmail.getText().toString();
