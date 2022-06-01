@@ -54,6 +54,7 @@ public class UserPropertiesActivity extends AppCompatActivity {
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                properties.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Property property = dataSnapshot.getValue(Property.class);
 
@@ -89,6 +90,13 @@ public class UserPropertiesActivity extends AppCompatActivity {
             public void onItemClickRequests(Property property) {
                 Intent intent = new Intent(UserPropertiesActivity.this, MadeReservationsActivity.class);
                 intent.putExtra(MadeReservationsActivity.PROPERTY_RESERVATIONS, property);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemClickEdit(Property property) {
+                Intent intent = new Intent(UserPropertiesActivity.this, EditPropertyActivity.class);
+                intent.putExtra(EditPropertyActivity.EDIT_PROPERTY, property);
                 startActivity(intent);
             }
         });

@@ -23,6 +23,7 @@ public class UserPropertiesRecViewAdapter extends RecyclerView.Adapter<UserPrope
     public interface OnItemClickListener {
         void onItemClick(Property property);
         void onItemClickRequests(Property property);
+        void onItemClickEdit(Property property);
     }
 
     Context context;
@@ -46,7 +47,7 @@ public class UserPropertiesRecViewAdapter extends RecyclerView.Adapter<UserPrope
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Property property = properties.get(position);
         holder.txtPropertyName.setText(property.getName());
-//        holder.getDetails().setOnClickListener(v -> listener.onItemClick(property));
+        holder.getEdit().setOnClickListener(v -> listener.onItemClickEdit(property));
         holder.getRequests().setOnClickListener(v -> listener.onItemClickRequests(property));
         holder.getReservations().setOnClickListener(v -> listener.onItemClick(property));
         Picasso.get().load(property.getImage()).into(holder.imgProperty);

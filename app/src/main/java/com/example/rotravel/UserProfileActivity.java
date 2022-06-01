@@ -3,6 +3,7 @@ package com.example.rotravel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import com.example.rotravel.Model.Property;
 import com.example.rotravel.Model.Reservation;
 import com.example.rotravel.Model.User;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,39 +24,42 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UserProfileActivity extends BaseMenuActivity {
 
     // Widgets
     private TextView txtName;
-    private TextView txtPhone;
-    private TextView txtEmail;
-    private MaterialButton btnMyProperties;
+    private MaterialButton btnMyProperties, btnEdit;
+    private TextInputLayout editPhone, editEmail;
 
     RecyclerView allReservations;
     private AllReservedPropertiesAdapter adapter;
 
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase, userDatabase;
 
     private final ArrayList<Property> properties = new ArrayList<>();
     private final ArrayList<Reservation> reservations = new ArrayList<>();
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         txtName = findViewById(R.id.txtName);
-        txtPhone = findViewById(R.id.txtPhone);
-        txtEmail = findViewById(R.id.txtEmail);
+        editEmail = findViewById(R.id.editEmail);
+        editPhone = findViewById(R.id.editPhone);
         allReservations = findViewById(R.id.allReservations);
         btnMyProperties = findViewById(R.id.btnMyProperties);
+        btnEdit = findViewById(R.id.btnEdit);
 
-        User user = ApplicationManager.getInstance().getUser();
+        user = ApplicationManager.getInstance().getUser();
         String fullName = user.getFirstName() + " " + user.getLastName();
 
         txtName.setText(fullName);
-        txtPhone.setText(user.getPhone());
-        txtEmail.setText(user.getEmail());
+
+        Objects.requireNonNull(editPhone.getEditText()).setText(user.getPhone());
+        Objects.requireNonNull(editEmail.getEditText()).setText(user.getEmail());
 
 
         btnMyProperties.setOnClickListener(v -> {
@@ -62,9 +67,26 @@ public class UserProfileActivity extends BaseMenuActivity {
             startActivity(intent);
         });
 
+        btnEdit.setOnClickListener(v -> editUserDetails());
+
         mDatabase = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Reservations");
+        userDatabase = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("User");
 
         showReservations();
+    }
+
+    private void editUserDetails() {
+        String phone = Objects.requireNonNull(editPhone.getEditText()).getText().toString();
+        String email = Objects.requireNonNull(editEmail.getEditText()).getText().toString();
+
+        if(phone.isEmpty() || email.isEmpty()) {
+            Toast.makeText(this, "All fields are required!", Toast.LENGTH_LONG).show();
+        } else {
+            userDatabase.child(user.getId()).child("phone").setValue(phone);
+            userDatabase.child(user.getId()).child("email").setValue(email);
+
+            Toast.makeText(this, "Data has been updated", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void showReservations() {

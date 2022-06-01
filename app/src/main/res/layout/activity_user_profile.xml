@@ -53,68 +53,98 @@
                         android:layout_height="250dp"
                         android:layout_centerInParent="true"
                         android:src="@drawable/ic_profile_picture" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnMyProperties"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="20dp"
+                        android:backgroundTint="@color/white"
+                        android:text="My properties"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textColor"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="7dp"
+                        app:strokeColor="@color/blue"
+                        app:strokeWidth="3dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
+                        android:padding="10dp"
                         android:layout_centerInParent="true"
                         android:id="@+id/info"
                         android:layout_below="@+id/imgLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:padding="5dp"
-                            android:id="@+id/txtName"
-                            android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/txtName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="User name"
+                        android:textColor="@color/textColor"
+                        android:textSize="17sp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_below="@+id/txtName"
+                        android:id="@+id/editPhone"
+                        android:layout_marginTop="10dp"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeColor="@color/textColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="17sp"
-                            android:textColor="@color/textColor"
-                            android:text="User name"/>
-                        <TextView
-                            android:layout_below="@+id/txtName"
-                            android:padding="5dp"
-                            android:layout_width="wrap_content"
+                            android:hint="phone" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_below="@id/editPhone"
+                        android:id="@+id/editEmail"
+                        android:layout_marginTop="10dp"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeColor="@color/textColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="17sp"
-                            android:id="@+id/txtPhone"
-                            android:textColor="@color/textColor"
-                            android:text="Phone number"/>
-                        <TextView
-                            android:layout_below="@+id/txtPhone"
-                            android:padding="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="17sp"
-                            android:id="@+id/txtEmail"
-                            android:textColor="@color/textColor"
-                            android:text="Email"/>
+                            android:hint="email" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="70dp"
+                        android:layout_below="@+id/editEmail"
+                        android:layout_centerHorizontal="true"
+                        android:backgroundTint="@color/textColor"
+                        android:padding="20dp"
+                        android:text="Edit"
+                        android:layout_marginTop="20dp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="7dp"
+                        app:icon="@drawable/ic_edit_icon" />
 
                     </RelativeLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/btnMyProperties"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/info"
-                    android:layout_centerHorizontal="true"
-                    android:backgroundTint="@color/white"
-                    android:text="My properties"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textColor"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="7dp"
-                    app:strokeColor="@color/blue"
-                    app:strokeWidth="3dp" />
 
                 <LinearLayout
                     android:id="@+id/reservationsShow"
                     android:layout_width="wrap_content"
                     android:padding="20dp"
-                    android:layout_below="@+id/btnMyProperties"
+                    android:layout_below="@+id/info"
                     android:orientation="vertical"
-                    android:layout_marginTop="10dp"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"

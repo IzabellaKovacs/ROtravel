@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ROtravel">
         <activity
+            android:name=".EditPropertyActivity"
+            android:exported="false" />
+        <activity
             android:name=".AcceptedReservationsActivity"
             android:exported="false" />
         <activity
