@@ -67,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }
+
     private void loginUser(){
         String email = txtEmail.getText().toString();
         String password = txtPassword.getText().toString();
@@ -79,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
             txtPassword.requestFocus();
         }else {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-
                 if (task.isSuccessful()) {
                     getUser(task.getResult().getUser().getUid());
                 } else {

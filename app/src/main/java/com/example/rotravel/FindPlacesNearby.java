@@ -12,8 +12,11 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rotravel.HelperClasses.AppPermissions;
 import com.example.rotravel.Model.Property;
@@ -49,7 +52,6 @@ public class FindPlacesNearby extends AppCompatActivity implements
     private TextInputEditText txtSearchPlaceName;
 
     private boolean canAddMarker = false;
-    private boolean canSearch = false;
     private double lat;
     private double lng;
     private String name;
@@ -92,9 +94,18 @@ public class FindPlacesNearby extends AppCompatActivity implements
             finish();
         });
 
-//        txtSearchPlaceName.setOnClickListener(v -> {
-//            canSearch = true;
-//        });
+        txtSearchPlaceName.setOnKeyListener((v, keyCode, event) -> {
+            if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                String name = txtSearchPlaceName.getText().toString();
+                if (name.isEmpty()) {
+                    getDeviceLocation();
+                } else {
+                    searchProperty(name);
+                }
+                return true;
+            }
+            return false;
+        });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.homeMap);
@@ -105,6 +116,7 @@ public class FindPlacesNearby extends AppCompatActivity implements
 
     private void searchProperty(String name) {
         propertiesHashMap.clear();
+        mGoogleMap.clear();
         FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Properties")
                 .addValueEventListener(new ValueEventListener() {
 
@@ -116,7 +128,7 @@ public class FindPlacesNearby extends AppCompatActivity implements
 
                             if(property == null) continue;
 
-                            if(!name.isEmpty() && (property.getName().toLowerCase().startsWith(name.toLowerCase())) || property.getName().equals((name.toLowerCase())) ){
+                            if(property.getName().toLowerCase().startsWith(name.toLowerCase()) || property.getName().equals(name.toLowerCase())) {
                                 MarkerOptions markerOptions = new MarkerOptions();
                                 markerOptions.position(new LatLng(property.getLat(), property.getLng()));
                                 markerOptions.title(property.getName());
@@ -167,33 +179,20 @@ public class FindPlacesNearby extends AppCompatActivity implements
 
            });
        }
-
-//       if(canSearch){
-//           name = Objects.requireNonNull(txtSearchPlaceName.getText()).toString();
-//           searchProperty(name);
-//       }
     }
 
     @SuppressLint("MissingPermission")
     private void getDeviceLocation() {
-        /*
-         * Get the best and most recent location of the device, which may be null in rare
-         * cases when a location is not available.
-         */
         FusedLocationProviderClient fusedLocationProviderClient = new FusedLocationProviderClient(this);
 
         try {
             if (!permissionDenied) {
                 Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
-                locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
-                        if (task.isSuccessful()) {
-                            // Set the map's camera position to the current location of the device.
-                            Location lastKnownLocation = task.getResult();
-                            if (lastKnownLocation != null) {
-                                getAllLocations(lastKnownLocation);
-                            }
+                locationResult.addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Location lastKnownLocation = task.getResult();
+                        if (lastKnownLocation != null) {
+                            getAllLocations(lastKnownLocation);
                         }
                     }
                 });
@@ -204,6 +203,8 @@ public class FindPlacesNearby extends AppCompatActivity implements
     }
 
     private void getAllLocations(Location lastKnownLocation) {
+        propertiesHashMap.clear();
+        mGoogleMap.clear();
         FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Properties")
                 .addValueEventListener(new ValueEventListener() {
                     @Override

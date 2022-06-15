@@ -25,7 +25,25 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="40dp">
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fab"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_gravity="end|bottom"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:backgroundTint="@color/textColor"-->
+<!--            android:contentDescription="add_city"-->
+<!--            android:src="@drawable/ic_add_icon"-->
+<!--            android:tintMode="@color/white"-->
+<!--            app:backgroundTint="#3E3F54"-->
+<!--            app:rippleColor="#9B8D9E" />-->
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -1,45 +1,39 @@
 package com.example.rotravel;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.rotravel.HelperClasses.AllCitiesRecViewAdapter;
+import com.example.rotravel.HelperClasses.ApplicationManager;
 import com.example.rotravel.HelperClasses.BaseMenuActivity;
 import com.example.rotravel.Model.Place;
+import com.example.rotravel.Model.User;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class TripPlanActivity extends BaseMenuActivity {
 
     private RecyclerView allPlaces;
-    ImageButton btnSearch;
-    EditText txtSearch;
+    private ImageButton btnSearch;
+    private EditText txtSearch;
+    private FloatingActionButton fab;
 
     private AllCitiesRecViewAdapter adapter;
-    private DatabaseReference mDatabse;
+    private DatabaseReference mDatabase, mStaff;
     private DataSnapshot placesDataSnapshot;
     ArrayList<Place> places = new ArrayList<>();
 
@@ -50,8 +44,19 @@ public class TripPlanActivity extends BaseMenuActivity {
         allPlaces = findViewById(R.id.allPlaces);
         btnSearch = findViewById(R.id.btnSearch);
         txtSearch = findViewById(R.id.txtSearch);
+        //fab = findViewById(R.id.fab);
 
-        mDatabse = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
+//        mStaff = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
+//                .getReference("Staff");
+//
+//        getStaff();
+//
+//        if(staff2.get(0).getUserId().equals(ApplicationManager.getInstance().getUser().getId())) {
+//            fab.show();
+//        } else fab.hide();
+
+
+        mDatabase = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
                 .getReference("Places");
 
         showAllPlaces();
@@ -60,7 +65,38 @@ public class TripPlanActivity extends BaseMenuActivity {
             String name = txtSearch.getText().toString();
             firebasePlacesSearch(name);
         });
+
+//        fab.setOnClickListener(v -> {
+//
+//        });
     }
+
+//    private void getStaff() {
+//        ValueEventListener valueEventListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    ArrayList<Staff> staff1 = new ArrayList<>();
+//                    Staff staff = dataSnapshot.getValue(Staff.class);
+//
+//                    assert staff != null;
+//                    if(staff.getUserId().equals(ApplicationManager.getInstance().getUser().getId())) {
+//                        staff1.add(staff);
+//                        staff2.add(staff1.get(0));
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        };
+//
+//        mStaff.addValueEventListener(valueEventListener);
+//
+//    }
+
 
     @Override
     public int getLayoutRes() {
@@ -82,7 +118,7 @@ public class TripPlanActivity extends BaseMenuActivity {
         };
 
 
-        mDatabse.addValueEventListener(postListener);
+        mDatabase.addValueEventListener(postListener);
 
         allPlaces.setHasFixedSize(true);
         allPlaces.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

@@ -36,96 +36,49 @@
             android:layout_marginTop="55dp"
             android:id="@+id/textDestination"/>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@+id/textDestination"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:id="@+id/btnsDestination">-->
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                style="@style/Widget.MaterialComponents.Button.Icon"-->
-<!--                android:layout_width="53dp"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:backgroundTint="@color/red"-->
-<!--                app:cornerRadius="10dp"-->
-<!--                app:icon="@drawable/ic_city_icon"-->
-<!--                android:id="@+id/btnDestinationCity"/>-->
-
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                style="@style/Widget.MaterialComponents.Button.Icon"-->
-<!--                android:layout_width="53dp"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:layout_marginStart="30dp"-->
-<!--                android:backgroundTint="@color/red"-->
-<!--                app:cornerRadius="10dp"-->
-<!--                app:icon="@drawable/ic_hiking_icon"-->
-<!--                android:id="@+id/btnDestinationHiking"/>-->
-
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                style="@style/Widget.MaterialComponents.Button.Icon"-->
-<!--                android:layout_width="53dp"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:layout_marginStart="30dp"-->
-<!--                android:backgroundTint="@color/red"-->
-<!--                app:cornerRadius="10dp"-->
-<!--                app:icon="@drawable/ic_relax_icon"-->
-<!--                android:id="@+id/btnDestinationRelax"/>-->
-
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                style="@style/Widget.MaterialComponents.Button.Icon"-->
-<!--                android:layout_width="53dp"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:layout_marginStart="30dp"-->
-<!--                android:backgroundTint="@color/red"-->
-<!--                app:cornerRadius="10dp"-->
-<!--                app:icon="@drawable/ic_mountain_icon"-->
-<!--                android:id="@+id/btnDestinationMountain"/>-->
-<!--        </LinearLayout>-->
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:layout_below="@+id/textDestination">
 
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/layoutShare"-->
+<!--                android:layout_width="300dp"-->
+<!--                android:layout_height="155dp"-->
+<!--                android:layout_marginTop="30dp"-->
+<!--                android:background="@drawable/shape"-->
+<!--                android:backgroundTint="@color/red"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.51"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/layoutPlanTrip">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgViewShare"-->
+<!--                    android:layout_width="150dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:layout_alignParentTop="true"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_marginEnd="70dp"-->
+<!--                    android:src="@drawable/ic_share" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btnShareExperience"-->
+<!--                    android:layout_width="300dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_alignBottom="@+id/imgViewShare"-->
+<!--                    android:layout_marginBottom="-43dp"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    android:padding="0dp"-->
+<!--                    android:text="Share your experience to others"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@color/textColor"-->
+<!--                    android:textStyle="bold" />-->
+<!--            </RelativeLayout>-->
+
             <RelativeLayout
-                android:id="@+id/layoutShare"
-                android:layout_width="300dp"
-                android:layout_height="155dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/shape"
-                android:backgroundTint="@color/red"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.51"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutPlanTrip">
-
-                <ImageView
-                    android:id="@+id/imgViewShare"
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="70dp"
-                    android:src="@drawable/ic_share" />
-
-                <Button
-                    android:id="@+id/btnShareExperience"
-                    android:layout_width="300dp"
-                    android:layout_height="60dp"
-                    android:layout_alignBottom="@+id/imgViewShare"
-                    android:layout_marginBottom="-43dp"
-                    android:backgroundTint="@color/white"
-                    android:padding="0dp"
-                    android:text="Share your experience to others"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textColor"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="80dp"
                 android:id="@+id/layoutFindPlaces"
                 android:layout_width="160dp"
                 android:layout_height="250dp"
@@ -168,7 +121,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="84dp"
+                android:layout_marginTop="200dp"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/shape"
                 android:backgroundTint="@color/blue"

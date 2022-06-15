@@ -33,9 +33,6 @@
             android:name=".UserPropertiesActivity"
             android:exported="false" />
         <activity
-            android:name=".ShareExperienceActivity"
-            android:exported="false" />
-        <activity
             android:name=".FindPlacesNearby"
             android:exported="false" />
         <activity

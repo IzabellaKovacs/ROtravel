@@ -13,7 +13,6 @@ public class WelcomeActivity extends BaseMenuActivity {
 
     private Button btnPlanTrip;
     private Button btnFindPlacesNearby;
-    private Button btnShareExperience;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +20,6 @@ public class WelcomeActivity extends BaseMenuActivity {
 
         btnPlanTrip = findViewById(R.id.btnPlanTrip);
         btnFindPlacesNearby = findViewById(R.id.btnFindPlaces);
-        btnShareExperience = findViewById(R.id.btnShareExperience);
 
         btnPlanTrip.setOnClickListener(v -> {
             Intent intent = new Intent(WelcomeActivity.this, TripPlanActivity.class);
@@ -30,11 +28,6 @@ public class WelcomeActivity extends BaseMenuActivity {
 
         btnFindPlacesNearby.setOnClickListener(v -> {
             Intent intent = new Intent(WelcomeActivity.this, FindPlacesNearby.class);
-            startActivity(intent);
-        });
-
-        btnShareExperience.setOnClickListener(v -> {
-            Intent intent = new Intent(WelcomeActivity.this, ShareExperienceActivity.class);
             startActivity(intent);
         });
 

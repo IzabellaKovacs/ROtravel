@@ -69,7 +69,7 @@ public class UserProfileActivity extends BaseMenuActivity {
 
         btnEdit.setOnClickListener(v -> editUserDetails());
 
-        mDatabase = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("Reservations");
+        mDatabase = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("AcceptedReservations");
         userDatabase = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app").getReference("User");
 
         showReservations();

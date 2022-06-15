@@ -219,8 +219,6 @@ public class PropertyActivity extends AppCompatActivity {
                                 newReservation.setTotal(txtTotalPayment.getText().toString());
                                 newReservation.setTotalCapacity(maxCap);
 
-                                //waitResponseForReservation(newReservation);
-
                                 mDatabase.child(newReservation.getId()).setValue(newReservation);
 
                                 AlertDialog.Builder builder = new AlertDialog.Builder(PropertyActivity.this);
@@ -241,56 +239,5 @@ public class PropertyActivity extends AppCompatActivity {
 
         mDatabase.addValueEventListener(postListener);
     }
-
-//    private void waitResponseForReservation(Reservation newReservation) {
-//        if(ApplicationManager.getInstance().getUser().getId().equals(property.getIdUser())) {
-//            NotificationManager manager = (NotificationManager)
-//                    getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-//
-//            // Initialize intent for yes button
-//            Intent intent1 = new Intent(PropertyActivity.this, MadeReservationsActivity.class);
-//            intent1.putExtra("yes", true);
-//            intent1.putExtra(MadeReservationsActivity.RESPONSE, newReservation);
-//            intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent1 = PendingIntent.getActivity(
-//                    PropertyActivity.this, 0, intent1, PendingIntent.FLAG_ONE_SHOT);
-//
-//            // Initialize intent for no button
-//            Intent intent2 = new Intent(PropertyActivity.this, MadeReservationsActivity.class);
-//            intent2.putExtra("no", false);
-//            intent2.putExtra(MadeReservationsActivity.RESPONSE, newReservation);
-//            intent2.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent2 = PendingIntent.getActivity(
-//                    PropertyActivity.this, 0, intent2, PendingIntent.FLAG_ONE_SHOT);
-//
-//            // Get default ringtone uri
-//            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-//            //Initialize notification builder
-//            NotificationCompat.Builder builder = new NotificationCompat.Builder(
-//                    PropertyActivity.this, getString(R.string.app_name));
-//            // Set notification title
-//            builder.setContentTitle("Reservation request");
-//            // Set content text
-//            if (newReservation.getIdProperty().equals(property.getId()))
-//                builder.setContentText("Reservation at " + property.getName() + ", date: " + newReservation.getDate());
-//            // Set icon
-//            builder.setSmallIcon(R.drawable.ic_notifications_ic);
-//            // Set sound
-//            builder.setSound(uri);
-//            // Set auto cancel
-//            builder.setAutoCancel(true);
-//            // Set priority
-//            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
-//
-//            builder.addAction(R.drawable.ic_launcher_foreground, "Yes", pendingIntent1);
-//            builder.addAction(R.drawable.ic_launcher_foreground, "No", pendingIntent2);
-//
-//            // Notification manager
-//            manager.notify(1, builder.build());
-//        }
-//
-//        Intent intent = new Intent(PropertyActivity.this, MadeReservationsActivity.class);
-//        intent.putExtra(MadeReservationsActivity.RESPONSE, newReservation);
-//    }
 
 }

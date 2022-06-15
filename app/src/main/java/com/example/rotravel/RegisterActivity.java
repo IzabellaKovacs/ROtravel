@@ -22,7 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText txtFirstName, txtLastName, txtPhone, txtEmail, txtPassword, txtRePassword;
     MaterialButton btnRegister;
     private DatabaseReference mDatabase;
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
