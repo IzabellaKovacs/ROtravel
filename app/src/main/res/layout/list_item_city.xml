@@ -9,8 +9,8 @@
     android:id="@+id/parent">
 
     <RelativeLayout
-        android:layout_width="390dp"
-        android:layout_height="250dp">
+        android:layout_width="360dp"
+        android:layout_height="240dp">
 
         <ImageView
             android:id="@+id/imgPlace"
@@ -20,17 +20,16 @@
             android:scaleType="centerCrop"/>
 
         <TextView
+            android:id="@+id/txtPlaceName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#81E4E7ED"
             android:layout_alignParentBottom="true"
+            android:background="#81E4E7ED"
             android:text="City Name"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:id="@+id/txtPlaceName"
             android:textAlignment="center"
-            android:textSize="20sp"
-            />
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

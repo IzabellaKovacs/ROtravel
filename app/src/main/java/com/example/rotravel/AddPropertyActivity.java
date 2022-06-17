@@ -115,7 +115,6 @@ public class AddPropertyActivity extends BaseMenuActivity {
         String description = txtDescription.getText().toString();
         String price = txtPrice.getText().toString();
         String capacity = txtCapacity.getText().toString();
-
         int num;
         int maxCap;
 
@@ -142,7 +141,7 @@ public class AddPropertyActivity extends BaseMenuActivity {
             txtDescription.setError("Description is required");
             txtDescription.requestFocus();
         }else if(TextUtils.isEmpty(price) || num > 100 ){
-            txtPrice.setError("Price must be between 10 - 100 ron / night");
+            txtPrice.setError("Price must be less or equal to 100 ron");
             txtPrice.requestFocus();
         } else if(uri == null){
             Toast.makeText(this, "Upload image", Toast.LENGTH_SHORT).show();

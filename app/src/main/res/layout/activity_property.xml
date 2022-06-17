@@ -189,7 +189,7 @@
                 android:layout_marginTop="30dp"
                 android:backgroundTint="#FBF8DD"
                 android:elevation="5dp"
-                app:cardCornerRadius="25dp">
+                app:cardCornerRadius="10dp">
 
                 <RelativeLayout
 
@@ -307,7 +307,7 @@
                             android:layout_height="70dp"
                             android:layout_marginEnd="5dp"
                             android:backgroundTint="@color/white"
-                            android:text="Contact owner"
+                            android:text="Contact"
                             android:textAllCaps="false"
                             android:textColor="@color/blue"
                             android:textSize="15sp"
@@ -320,7 +320,7 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnReserve"
-                            android:layout_width="160dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="70dp"
                             android:layout_marginStart="5dp"
                             android:backgroundTint="@color/blue"

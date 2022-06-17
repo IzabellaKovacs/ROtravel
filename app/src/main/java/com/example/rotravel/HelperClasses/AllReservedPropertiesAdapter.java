@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rotravel.Model.AcceptedReservation;
 import com.example.rotravel.Model.Property;
 import com.example.rotravel.Model.Reservation;
 import com.example.rotravel.R;
@@ -30,9 +31,9 @@ public class AllReservedPropertiesAdapter extends RecyclerView.Adapter<AllReserv
 
     Context context;
     ArrayList<Property> properties;
-    ArrayList<Reservation> reservations;
+    ArrayList<AcceptedReservation> reservations;
 
-    public AllReservedPropertiesAdapter(Context context, ArrayList<Property> properties, ArrayList<Reservation> reservations) {
+    public AllReservedPropertiesAdapter(Context context, ArrayList<Property> properties, ArrayList<AcceptedReservation> reservations) {
         this.context = context;
         this.properties = properties;
         this.reservations = reservations;
@@ -48,25 +49,24 @@ public class AllReservedPropertiesAdapter extends RecyclerView.Adapter<AllReserv
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Property property = properties.get(position);
-        for(Reservation r : reservations){
-            if(property.getId().equals(r.getIdProperty())) {
-                holder.txtReservedPropertyDate.setText(r.getDate());
-            }
+        AcceptedReservation reservation = reservations.get(position);
+            if(property.getId().equals(reservation.getIdProperty())) {
+                holder.txtReservedPropertyDate.setText(reservation.getDate());
                 holder.txtReservedPropertyName.setText(property.getName());
-        }
 
-        holder.deleteButton().setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("Are you sure you want to cancel reservation?" );
-            builder.setPositiveButton("Yes", (dialogInterface, i) ->
-                    FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
-                    .getReference("Reservations")
-                    .child(reservations.get(position).getId())
-                    .removeValue());
-            builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
-            builder.show();
+                holder.deleteButton().setOnClickListener(v -> {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Are you sure you want to cancel reservation?" );
+                    builder.setPositiveButton("Yes", (dialogInterface, i) ->
+                            FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
+                                    .getReference("AcceptedReservations")
+                                    .child(reservation.getId())
+                                    .removeValue());
+                    builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
+                    builder.show();
 
-        });
+                });
+            }
     }
 
 

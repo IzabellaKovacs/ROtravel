@@ -37,14 +37,11 @@
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+
         <LinearLayout
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnEdit"
@@ -55,7 +52,7 @@
                 android:text="Edit details"
                 android:textAllCaps="false"
                 android:textColor="@color/textColor"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 android:textStyle="bold"
                 app:cornerRadius="7dp"
                 app:icon="@drawable/ic_edit_icon"
@@ -68,18 +65,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="25dp"
                 android:backgroundTint="@color/white"
                 android:text="Requests"
+                android:textAllCaps="false"
                 android:textColor="@color/red"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 android:textStyle="bold"
-                android:layout_marginTop="25dp"
                 app:cornerRadius="7dp"
                 app:icon="@drawable/ic_notifications_ic"
                 app:iconTint="@color/red"
                 app:strokeColor="@color/red"
-                app:strokeWidth="2dp"
-                />
+                app:strokeWidth="2dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCheckReservations"
@@ -88,18 +85,17 @@
                 android:layout_marginStart="15dp"
                 android:backgroundTint="@color/white"
                 android:text="Reservations"
+                android:textAllCaps="false"
                 android:textColor="@color/blue"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 android:textStyle="bold"
                 app:cornerRadius="7dp"
                 app:icon="@drawable/ic_hotel"
                 app:iconTint="@color/blue"
                 app:strokeColor="@color/blue"
-                app:strokeWidth="2dp"
-              />
+                app:strokeWidth="2dp" />
 
         </LinearLayout>
 
-    </RelativeLayout>
 
 </LinearLayout>

@@ -44,17 +44,6 @@ public class TripPlanActivity extends BaseMenuActivity {
         allPlaces = findViewById(R.id.allPlaces);
         btnSearch = findViewById(R.id.btnSearch);
         txtSearch = findViewById(R.id.txtSearch);
-        //fab = findViewById(R.id.fab);
-
-//        mStaff = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
-//                .getReference("Staff");
-//
-//        getStaff();
-//
-//        if(staff2.get(0).getUserId().equals(ApplicationManager.getInstance().getUser().getId())) {
-//            fab.show();
-//        } else fab.hide();
-
 
         mDatabase = FirebaseDatabase.getInstance(" https://rotravel-f9f6a-default-rtdb.europe-west1.firebasedatabase.app")
                 .getReference("Places");
@@ -66,37 +55,7 @@ public class TripPlanActivity extends BaseMenuActivity {
             firebasePlacesSearch(name);
         });
 
-//        fab.setOnClickListener(v -> {
-//
-//        });
     }
-
-//    private void getStaff() {
-//        ValueEventListener valueEventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                    ArrayList<Staff> staff1 = new ArrayList<>();
-//                    Staff staff = dataSnapshot.getValue(Staff.class);
-//
-//                    assert staff != null;
-//                    if(staff.getUserId().equals(ApplicationManager.getInstance().getUser().getId())) {
-//                        staff1.add(staff);
-//                        staff2.add(staff1.get(0));
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        };
-//
-//        mStaff.addValueEventListener(valueEventListener);
-//
-//    }
-
 
     @Override
     public int getLayoutRes() {
@@ -104,7 +63,7 @@ public class TripPlanActivity extends BaseMenuActivity {
     }
 
     private void showAllPlaces(){
-        ValueEventListener postListener = new ValueEventListener(){
+        ValueEventListener postListener = new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

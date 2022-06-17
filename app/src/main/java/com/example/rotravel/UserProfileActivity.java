@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rotravel.HelperClasses.AllReservedPropertiesAdapter;
 import com.example.rotravel.HelperClasses.ApplicationManager;
 import com.example.rotravel.HelperClasses.BaseMenuActivity;
+import com.example.rotravel.Model.AcceptedReservation;
 import com.example.rotravel.Model.Property;
 import com.example.rotravel.Model.Reservation;
 import com.example.rotravel.Model.User;
@@ -39,7 +40,7 @@ public class UserProfileActivity extends BaseMenuActivity {
     private DatabaseReference mDatabase, userDatabase;
 
     private final ArrayList<Property> properties = new ArrayList<>();
-    private final ArrayList<Reservation> reservations = new ArrayList<>();
+    private final ArrayList<AcceptedReservation> reservations = new ArrayList<>();
     User user;
 
     @Override
@@ -60,7 +61,6 @@ public class UserProfileActivity extends BaseMenuActivity {
 
         Objects.requireNonNull(editPhone.getEditText()).setText(user.getPhone());
         Objects.requireNonNull(editEmail.getEditText()).setText(user.getEmail());
-
 
         btnMyProperties.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), UserPropertiesActivity.class);
@@ -97,7 +97,7 @@ public class UserProfileActivity extends BaseMenuActivity {
                 reservations.clear();
                 properties.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Reservation reservation = dataSnapshot.getValue(Reservation.class);
+                    AcceptedReservation reservation = dataSnapshot.getValue(AcceptedReservation.class);
 
                     if (ApplicationManager.getInstance().getUser().getId().equals(reservation.getIdUser())) {
                         reservations.add(reservation);
@@ -140,7 +140,7 @@ public class UserProfileActivity extends BaseMenuActivity {
         allReservations.setHasFixedSize(true);
         allReservations.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        adapter = new AllReservedPropertiesAdapter(this, properties, reservations );
+        adapter = new AllReservedPropertiesAdapter(this, properties, reservations);
         allReservations.setAdapter(adapter);
 
     }

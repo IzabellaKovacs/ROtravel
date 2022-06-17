@@ -204,10 +204,10 @@ public class PropertyActivity extends AppCompatActivity {
                     assert reservation != null;
 
                         btnReserve.setOnClickListener(v -> {
-                            if(numDay == 0){
-                                Toast.makeText(PropertyActivity.this, "You must select a date", Toast.LENGTH_LONG).show();
-                            }else if(maxCap > property.getCapacity()){
-                                Toast.makeText(PropertyActivity.this, "Maximum capacity is " + property.getCapacity(), Toast.LENGTH_LONG).show();
+                            if(numDay == 0) {
+                                Toast.makeText(PropertyActivity.this, "You must select date", Toast.LENGTH_LONG).show();
+                            }else if(maxCap > property.getCapacity()) {
+                                Toast.makeText(PropertyActivity.this, "Maximum capacity is" + property.getCapacity(), Toast.LENGTH_LONG).show();
                             } else {
 
                                 newReservation.setId(UUID.randomUUID().toString());
@@ -223,7 +223,7 @@ public class PropertyActivity extends AppCompatActivity {
 
                                 AlertDialog.Builder builder = new AlertDialog.Builder(PropertyActivity.this);
                                 builder.setTitle("THE REQUEST HAS BEEN SENT!");
-                                builder.setMessage("\n\nCheck your profile to see if the owner has approved/declined your request. ");
+                                builder.setMessage("\n\nCheck your profile to see if the owner has approved your request.");
                                 builder.setNegativeButton("Ok", (dialogInterface, i) -> dialogInterface.dismiss());
                                 builder.show();
                             }

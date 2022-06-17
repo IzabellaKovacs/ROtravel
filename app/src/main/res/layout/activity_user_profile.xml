@@ -66,7 +66,7 @@
                         android:text="My properties"
                         android:textAllCaps="false"
                         android:textColor="@color/textColor"
-                        android:textSize="17sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         app:cornerRadius="7dp"
                         app:strokeColor="@color/blue"
@@ -123,7 +123,7 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnEdit"
                         android:layout_width="wrap_content"
-                        android:layout_height="70dp"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/editEmail"
                         android:layout_centerHorizontal="true"
                         android:backgroundTint="@color/textColor"

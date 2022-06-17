@@ -57,7 +57,7 @@ public class EditPropertyActivity extends AppCompatActivity {
     }
 
 
-    public void edit(){
+    public void edit() {
         String name = Objects.requireNonNull(editName.getEditText()).getText().toString();
         String price = editPrice.getEditText().getText().toString();
         String description = Objects.requireNonNull(editDescription.getEditText()).getText().toString();
@@ -65,32 +65,36 @@ public class EditPropertyActivity extends AppCompatActivity {
 
         int priceToInt, capacityToInt;
 
-        try{
+        try {
             priceToInt = Integer.parseInt(price);
-        }catch(Exception e){
+        } catch (Exception e) {
             editPrice.setError("Price is required");
             editPrice.requestFocus();
             return;
         }
 
-        try{
+        try {
             capacityToInt = Integer.parseInt(capacity);
-        }catch(Exception e){
+        } catch (Exception e) {
             editCapacity.setError("Capacity is required");
             editCapacity.requestFocus();
             return;
         }
 
-        if(name.isEmpty() || price.isEmpty() || description.isEmpty() || capacity.isEmpty()) {
+        if (name.isEmpty() || description.isEmpty() || capacity.isEmpty()) {
             Toast.makeText(this, "All fields are required!", Toast.LENGTH_LONG).show();
         } else {
-            database.child(property.getId()).child("name").setValue(name);
-            database.child(property.getId()).child("price").setValue(priceToInt);
-            database.child(property.getId()).child("description").setValue(description);
-            database.child(property.getId()).child("capacity").setValue(capacityToInt);
+            if (price.isEmpty() || priceToInt > 100) {
+                editPrice.setError("Price must be less or equal to 100 ron");
+                editPrice.requestFocus();
+            } else {
+                database.child(property.getId()).child("name").setValue(name);
+                database.child(property.getId()).child("price").setValue(priceToInt);
+                database.child(property.getId()).child("description").setValue(description);
+                database.child(property.getId()).child("capacity").setValue(capacityToInt);
 
-            Toast.makeText(this, "Data has been updated", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Data has been updated", Toast.LENGTH_LONG).show();
+            }
         }
     }
-
 }
